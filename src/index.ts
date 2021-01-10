@@ -38,6 +38,60 @@ interface Graph {
   edgeList: Edge[];
 }
 
+interface VerboseString {
+  id: number;
+  text: string;
+}
+
+interface VerboseStringMap {
+  [id: number]: VerboseString;
+}
+
+interface StringInfo {
+  id: number;
+  size: number;
+}
+
+interface VerboseNodeAttribute {
+  nodeId: number;
+  attributeId: number;
+  attributeNameId: StringInfo;
+  attributeAlternateNameId: StringInfo;
+  attributeUnitTextId: StringInfo;
+  attributeValueId: StringInfo;
+  attributeOptionalValueIdList: StringInfo[];
+  attributeTagIdSet: number[];
+}
+
+interface VerboseEdgeAttribute {
+  fromNodeId: number;
+  toNodeId: number;
+  attributeId: number;
+  attributeNameId: StringInfo;
+  attributeAlternateNameId: StringInfo;
+  attributeUnitTextId: StringInfo;
+  attributeValueId: StringInfo;
+  attributeOptionalValueIdList: StringInfo[];
+  attributeTagIdSet: number[];
+}
+
+interface VerboseGraph {
+  stringMap: VerboseStringMap;
+  unitTextMap: VerboseStringMap;
+  nodeAttributeList: VerboseNodeAttribute[];
+  edgeAttributeList: VerboseEdgeAttribute[];
+}
+
 const parseAsGraph = (content: string): Graph => JSON.parse(content);
 
-export { parseAsGraph };
+const toVerbose = (_graph: Graph): VerboseGraph => {
+  const results = {
+    stringMap: {},
+    unitTextMap: {},
+    nodeAttributeList: [],
+    edgeAttributeList: [],
+  };
+  return results;
+};
+
+export { parseAsGraph, toVerbose };
