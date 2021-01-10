@@ -38,60 +38,47 @@ interface Graph {
   edgeList: Edge[];
 }
 
-interface VerboseString {
-  id: number;
-  text: string;
+interface Series {
+  name: string;
+  values: number[];
 }
 
-interface VerboseStringMap {
-  [id: number]: VerboseString;
+interface StringSeries {
+  name: string;
+  values: string[];
 }
 
-interface StringInfo {
-  id: number;
-  size: number;
-}
+// const seriesNameList = [
+//   'attribute_id',
+//   'node_id',
+//   'node_attribute_id',
+//   'node_name_id',
+//   'node_alternate_id',
+//   'node_unit_text_id',
+//   'node_value_id',
+//   'edge_from_node_id',
+//   'edge_to_node_id',
+//   'edge_attribute_id',
+//   'edge_name_id',
+//   'edge_alternate_id',
+//   'edge_unit_text_id',
+//   'edge_value_id',
+// ];
+// const stringSeriesNameList = ['anystring', 'unit_text', 'tag'];
 
-interface VerboseNodeAttribute {
-  nodeId: number;
-  attributeId: number;
-  attributeNameId: StringInfo;
-  attributeAlternateNameId: StringInfo;
-  attributeUnitTextId: StringInfo;
-  attributeValueId: StringInfo;
-  attributeOptionalValueIdList: StringInfo[];
-  attributeTagIdSet: number[];
-}
-
-interface VerboseEdgeAttribute {
-  fromNodeId: number;
-  toNodeId: number;
-  attributeId: number;
-  attributeNameId: StringInfo;
-  attributeAlternateNameId: StringInfo;
-  attributeUnitTextId: StringInfo;
-  attributeValueId: StringInfo;
-  attributeOptionalValueIdList: StringInfo[];
-  attributeTagIdSet: number[];
-}
-
-interface VerboseGraph {
-  stringMap: VerboseStringMap;
-  unitTextMap: VerboseStringMap;
-  nodeAttributeList: VerboseNodeAttribute[];
-  edgeAttributeList: VerboseEdgeAttribute[];
+interface DataGraph {
+  stringSeriesList: StringSeries[];
+  seriesList: Series[];
 }
 
 const parseAsGraph = (content: string): Graph => JSON.parse(content);
 
-const toVerbose = (_graph: Graph): VerboseGraph => {
+const toDataGraph = (_graph: Graph): DataGraph => {
   const results = {
-    stringMap: {},
-    unitTextMap: {},
-    nodeAttributeList: [],
-    edgeAttributeList: [],
+    stringSeriesList: [],
+    seriesList: [],
   };
   return results;
 };
 
-export { parseAsGraph, toVerbose };
+export { parseAsGraph, toDataGraph };
