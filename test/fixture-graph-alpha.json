@@ -1,0 +1,142 @@
+{
+    "attributeMetadataList": [
+        {
+            "id": "1",
+            "name": "Speed",
+            "alternateName": "速度",
+            "unitText": "km/h",
+            "tagSet": ["alpha", "beta"]
+        },
+        {
+            "id": "2",
+            "name": "Real Range",
+            "alternateName": "Range",
+            "unitText": "km",
+            "tagSet": ["zeta"]
+        },
+        {
+            "id": "3",
+            "name": "Cost per km",
+            "alternateName": "",
+            "unitText": "GBP",
+            "tagSet": ["alpha"]
+        },
+        {
+            "id": "4",
+            "name": "Name",
+            "alternateName": "",
+            "unitText": "",
+            "tagSet": ["alpha"]
+        },
+        {
+            "id": "5",
+            "name": "Cost per journey",
+            "alternateName": "",
+            "unitText": "GBP",
+            "tagSet": []
+        },
+        {
+            "id": "6",
+            "name": "",
+            "alternateName": "",
+            "unitText": "",
+            "tagSet": []
+        }
+    ],
+    "nodeList": [
+        {
+            "id": "1",
+            "attributeList": [
+                {
+                    "id": "4",
+                    "value": "car",
+                    "optionalValueList": ["車"],
+                    "tagSet": ["alpha"]
+                }
+            ]
+        },
+        {
+            "id": "2",
+            "attributeList": [
+                {
+                    "id": "4",
+                    "value": "plane",
+                    "optionalValueList": ["飛行機"],
+                    "tagSet": ["alpha", "echo"]
+                }
+            ]
+        },
+        {
+            "id": "10",
+            "attributeList": [
+                {
+                    "id": "4",
+                    "value": "gold",
+                    "optionalValueList": ["ゴールド"],
+                    "tagSet": []
+                }
+            ]
+        },
+        {
+            "id": "11",
+            "attributeList": [
+                {
+                    "id": "4",
+                    "value": "silver",
+                    "optionalValueList": [],
+                    "tagSet": []
+                }
+            ]
+        }
+    ],
+    "edgeList": [
+        {
+            "fromNode": "1",
+            "toNode": "10",
+            "attributeList": [
+                {
+                    "id": "1",
+                    "value": "100",
+                    "optionalValueList": [],
+                    "tagSet": ["alpha", "delta"]
+                },
+                {
+                    "id": "5",
+                    "value": "25",
+                    "optionalValueList": ["😁"],
+                    "tagSet": []
+                }
+            ]
+        },
+        {
+            "fromNode": "1",
+            "toNode": "11",
+            "attributeList": [
+                {
+                    "id": "1",
+                    "value": "150",
+                    "optionalValueList": ["😃"],
+                    "tagSet": ["alpha"]
+                },
+                {
+                    "id": "5",
+                    "value": "15",
+                    "optionalValueList": ["😇"],
+                    "tagSet": []
+                }
+            ]
+        },
+        {
+            "fromNode": "1",
+            "toNode": "100",
+            "attributeList": [
+                {
+                    "id": "250",
+                    "value": "150",
+                    "optionalValueList": [],
+                    "tagSet": ["alpha"]
+                }
+            ]
+        }
+    ]
+}
