@@ -40,7 +40,7 @@ interface Graph {
 
 interface Series {
   name: string;
-  values: number[];
+  values: Uint32Array;
 }
 
 interface StringSeries {
