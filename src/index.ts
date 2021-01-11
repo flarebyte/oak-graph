@@ -73,9 +73,20 @@ interface DataGraph {
 
 const parseAsGraph = (content: string): Graph => JSON.parse(content);
 
-const toDataGraph = (_graph: Graph): DataGraph => {
+const asStringSet = (items: string[]) =>
+  new Set(items.filter(s => s.length > 0));
+
+const toDataGraph = (graph: Graph): DataGraph => {
+  const unitTextSet = asStringSet(
+    graph.attributeMetadataList.map(v => v.unitText.trim())
+  );
   const results = {
-    stringSeriesList: [],
+    stringSeriesList: [
+      {
+        name: 'unit_text',
+        values: [''].concat([...unitTextSet].sort()),
+      },
+    ],
     seriesList: [],
   };
   return results;

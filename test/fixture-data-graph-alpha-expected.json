@@ -1,4 +1,15 @@
 {
-    "stringSeriesList": [],
-    "seriesList": []
+    "stringSeriesList": [
+        {
+          "name": "unit_text",
+          "values": [
+            "",
+            "GBP",
+            "km",
+            "km/h"
+          ]
+        }
+      ],
+      "seriesList": []
+
 }
