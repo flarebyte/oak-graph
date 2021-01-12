@@ -1,15 +1,41 @@
 {
     "stringSeriesList": [
-        {
-          "name": "unit_text",
-          "values": [
-            "",
-            "GBP",
-            "km",
-            "km/h"
-          ]
-        }
-      ],
-      "seriesList": []
-
-}
+      {
+        "name": "unit_text",
+        "values": [
+          "GBP",
+          "km",
+          "km/h"
+        ]
+      },
+      {
+        "name": "node_id",
+        "values": [
+          "1",
+          "2",
+          "11",
+          "12"
+        ]
+      }
+    ],
+    "seriesList": [
+      {
+        "name": "from_node_id",
+        "values": [
+          0,
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "name": "to_node_id",
+        "values": [
+          2,
+          3,
+          2,
+          1
+        ]
+      }
+    ]
+  }

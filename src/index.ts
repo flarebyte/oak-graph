@@ -40,7 +40,7 @@ interface Graph {
 
 interface Series {
   name: string;
-  values: Uint32Array;
+  values: number[];
 }
 
 interface StringSeries {
@@ -76,18 +76,56 @@ const parseAsGraph = (content: string): Graph => JSON.parse(content);
 const asStringSet = (items: string[]) =>
   new Set(items.filter(s => s.length > 0));
 
+const indexMap = (values: string[]): Map<string, number> => {
+  const resultMap = new Map<string, number>();
+  for (let index = 0; index < values.length; index++) {
+    resultMap.set(values[index], index);
+  }
+  return resultMap;
+};
+
+const valueOrDefault = <T>(defaultValue: T) => (value: T | undefined) =>
+  value === undefined ? defaultValue : value;
+
 const toDataGraph = (graph: Graph): DataGraph => {
   const unitTextSet = asStringSet(
     graph.attributeMetadataList.map(v => v.unitText.trim())
   );
+
+  const unitTextList = [...unitTextSet].sort();
+  // const idxUnitTextMap = indexMap(unitTextList);
+
+  const nodeIdList = graph.nodeList.map(v => v.id);
+  const idxNodeIdMap = indexMap(nodeIdList);
+
+  const fromNodeIdList = graph.edgeList.map(v =>
+    valueOrDefault(-1)(idxNodeIdMap.get(v.fromNode))
+  );
+  const toNodeIdList = graph.edgeList.map(v =>
+    valueOrDefault(-1)(idxNodeIdMap.get(v.toNode))
+  );
+
   const results = {
     stringSeriesList: [
       {
         name: 'unit_text',
-        values: [''].concat([...unitTextSet].sort()),
+        values: unitTextList,
+      },
+      {
+        name: 'node_id',
+        values: nodeIdList,
       },
     ],
-    seriesList: [],
+    seriesList: [
+      {
+        name: 'from_node_id',
+        values: fromNodeIdList,
+      },
+      {
+        name: 'to_node_id',
+        values: toNodeIdList,
+      },
+    ],
   };
   return results;
 };
