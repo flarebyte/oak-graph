@@ -105,6 +105,9 @@ const toDataGraph = (graph: Graph): DataGraph => {
     valueOrDefault(-1)(idxNodeIdMap.get(v.toNode))
   );
 
+  const attributeIdList = graph.attributeMetadataList.map(v => v.id);
+  // const idxAttributeIdMap = indexMap(attributeIdList);
+
   const results = {
     stringSeriesList: [
       {
@@ -114,6 +117,22 @@ const toDataGraph = (graph: Graph): DataGraph => {
       {
         name: 'node_id',
         values: nodeIdList,
+      },
+      {
+        name: 'attribute_id',
+        values: attributeIdList,
+      },
+      {
+        name: 'attribute_name',
+        values: graph.attributeMetadataList.map(v => v.name.trim()),
+      },
+      {
+        name: 'attribute_alternate_name',
+        values: graph.attributeMetadataList.map(v => v.alternateName.trim()),
+      },
+      {
+        name: 'attribute_unit_text',
+        values: graph.attributeMetadataList.map(v => v.unitText.trim()),
       },
     ],
     seriesList: [
