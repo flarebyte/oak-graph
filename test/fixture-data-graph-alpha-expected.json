@@ -1,6 +1,14 @@
 {
     "stringSeriesList": [
       {
+        "name": "tags",
+        "values": [
+          "alpha",
+          "beta",
+          "delta"
+        ]
+      },
+      {
         "name": "unit_text",
         "values": [
           "GBP",

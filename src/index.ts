@@ -71,6 +71,10 @@ interface DataGraph {
   seriesList: Series[];
 }
 
+interface GraphContext {
+  supportedTags: string[];
+}
+
 const parseAsGraph = (content: string): Graph => JSON.parse(content);
 
 const asStringSet = (items: string[]) =>
@@ -87,7 +91,7 @@ const indexMap = (values: string[]): Map<string, number> => {
 const valueOrDefault = <T>(defaultValue: T) => (value: T | undefined) =>
   value === undefined ? defaultValue : value;
 
-const toDataGraph = (graph: Graph): DataGraph => {
+const toDataGraph = (ctx: GraphContext, graph: Graph): DataGraph => {
   const unitTextSet = asStringSet(
     graph.attributeMetadataList.map(v => v.unitText.trim())
   );
@@ -110,6 +114,10 @@ const toDataGraph = (graph: Graph): DataGraph => {
 
   const results = {
     stringSeriesList: [
+      {
+        name: 'tags',
+        values: ctx.supportedTags,
+      },
       {
         name: 'unit_text',
         values: unitTextList,
