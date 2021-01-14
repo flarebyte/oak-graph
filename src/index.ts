@@ -140,8 +140,6 @@ const toDataGraph = (ctx: GraphContext, graph: Graph): DataGraph => {
   graph.attributeMetadataList.forEach((iAttr, aId) => {
     const nodeColumnValues: number[] = [];
     const nodeColumnSizes: number[] = [];
-    const edgeColumnValues: number[] = [];
-    const edgeColumnSizes: number[] = [];
     // Check all nodes
     for (const iNode of graph.nodeList) {
       const tempAttributes = iNode.attributeList.filter(a => a.id === iAttr.id);
@@ -153,18 +151,6 @@ const toDataGraph = (ctx: GraphContext, graph: Graph): DataGraph => {
           ? -1
           : valueOrDefault(-1)(idxStringMap.get(tempAttributes[0].value));
       nodeColumnValues.push(value);
-    }
-    // Check all edges
-    for (const iEdge of graph.edgeList) {
-      const tempAttributes = iEdge.attributeList.filter(a => a.id === iAttr.id);
-      const stringValue =
-        tempAttributes.length === 0 ? '' : tempAttributes[0].value;
-      edgeColumnSizes.push(stringValue.length);
-      const value =
-        tempAttributes.length === 0
-          ? -1
-          : valueOrDefault(-1)(idxStringMap.get(tempAttributes[0].value));
-      edgeColumnValues.push(value);
     }
 
     // summary for nodes
@@ -183,6 +169,23 @@ const toDataGraph = (ctx: GraphContext, graph: Graph): DataGraph => {
         name: `node_attribute_size_${aId}`,
         values: nodeColumnSizes,
       });
+    }
+  });
+
+  graph.attributeMetadataList.forEach((iAttr, aId) => {
+    const edgeColumnValues: number[] = [];
+    const edgeColumnSizes: number[] = [];
+    // Check all edges
+    for (const iEdge of graph.edgeList) {
+      const tempAttributes = iEdge.attributeList.filter(a => a.id === iAttr.id);
+      const stringValue =
+        tempAttributes.length === 0 ? '' : tempAttributes[0].value;
+      edgeColumnSizes.push(stringValue.length);
+      const value =
+        tempAttributes.length === 0
+          ? -1
+          : valueOrDefault(-1)(idxStringMap.get(tempAttributes[0].value));
+      edgeColumnValues.push(value);
     }
 
     // summary for edge
@@ -203,6 +206,7 @@ const toDataGraph = (ctx: GraphContext, graph: Graph): DataGraph => {
       });
     }
   });
+
   const results = {
     stringSeriesList: [
       {
