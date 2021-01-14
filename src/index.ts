@@ -110,8 +110,99 @@ const toDataGraph = (ctx: GraphContext, graph: Graph): DataGraph => {
   );
 
   const attributeIdList = graph.attributeMetadataList.map(v => v.id);
-  // const idxAttributeIdMap = indexMap(attributeIdList);
+  //const idxAttributeIdMap = indexMap(attributeIdList);
 
+  // TODO: trim
+  const allNodeValues = graph.nodeList
+    .flatMap(n => n.attributeList)
+    .map(a => a.value);
+  const allNodeOptValues = graph.nodeList
+    .flatMap(n => n.attributeList)
+    .flatMap(a => a.optionalValueList);
+  const allEdgeValues = graph.edgeList
+    .flatMap(n => n.attributeList)
+    .map(a => a.value);
+  const allEdgeOptValues = graph.edgeList
+    .flatMap(n => n.attributeList)
+    .flatMap(a => a.optionalValueList);
+
+  const stringValueSet = new Set(
+    allNodeValues
+      .concat(allNodeOptValues)
+      .concat(allEdgeValues)
+      .concat(allEdgeOptValues)
+  );
+  const stringValueList = [...stringValueSet].sort();
+  const idxStringMap = indexMap(stringValueList);
+
+  const resultsNode: Series[] = [];
+
+  graph.attributeMetadataList.forEach((iAttr, aId) => {
+    const nodeColumnValues: number[] = [];
+    const nodeColumnSizes: number[] = [];
+    const edgeColumnValues: number[] = [];
+    const edgeColumnSizes: number[] = [];
+    // Check all nodes
+    for (const iNode of graph.nodeList) {
+      const tempAttributes = iNode.attributeList.filter(a => a.id === iAttr.id);
+      const stringValue =
+        tempAttributes.length === 0 ? '' : tempAttributes[0].value;
+      nodeColumnSizes.push(stringValue.length);
+      const value =
+        tempAttributes.length === 0
+          ? -1
+          : valueOrDefault(-1)(idxStringMap.get(tempAttributes[0].value));
+      nodeColumnValues.push(value);
+    }
+    // Check all edges
+    for (const iEdge of graph.edgeList) {
+      const tempAttributes = iEdge.attributeList.filter(a => a.id === iAttr.id);
+      const stringValue =
+        tempAttributes.length === 0 ? '' : tempAttributes[0].value;
+      edgeColumnSizes.push(stringValue.length);
+      const value =
+        tempAttributes.length === 0
+          ? -1
+          : valueOrDefault(-1)(idxStringMap.get(tempAttributes[0].value));
+      edgeColumnValues.push(value);
+    }
+
+    // summary for nodes
+    const nodeCountWithValue = nodeColumnValues.filter(v => v >= 0).length;
+    const nodeCountNoValue = nodeColumnValues.filter(v => v < 0).length;
+    resultsNode.push({
+      name: `node_attribute_stats_${aId}`,
+      values: [nodeCountNoValue, nodeCountWithValue],
+    });
+    if (nodeCountWithValue) {
+      resultsNode.push({
+        name: `node_attribute_${aId}`,
+        values: nodeColumnValues,
+      });
+      resultsNode.push({
+        name: `node_attribute_size_${aId}`,
+        values: nodeColumnSizes,
+      });
+    }
+
+    // summary for edge
+    const edgeCountWithValue = edgeColumnValues.filter(v => v >= 0).length;
+    const edgeCountNoValue = edgeColumnValues.filter(v => v < 0).length;
+    resultsNode.push({
+      name: `edge_attribute_stats_${aId}`,
+      values: [edgeCountNoValue, edgeCountWithValue],
+    });
+    if (edgeCountWithValue) {
+      resultsNode.push({
+        name: `edge_attribute_${aId}`,
+        values: edgeColumnValues,
+      });
+      resultsNode.push({
+        name: `edge_attribute_size_${aId}`,
+        values: edgeColumnSizes,
+      });
+    }
+  });
   const results = {
     stringSeriesList: [
       {
@@ -142,6 +233,10 @@ const toDataGraph = (ctx: GraphContext, graph: Graph): DataGraph => {
         name: 'attribute_unit_text',
         values: graph.attributeMetadataList.map(v => v.unitText.trim()),
       },
+      {
+        name: 'strings',
+        values: stringValueList,
+      },
     ],
     seriesList: [
       {
@@ -152,7 +247,7 @@ const toDataGraph = (ctx: GraphContext, graph: Graph): DataGraph => {
         name: 'to_node_id',
         values: toNodeIdList,
       },
-    ],
+    ].concat(resultsNode),
   };
   return results;
 };

@@ -68,6 +68,26 @@
           "GBP",
           ""
         ]
+      },
+      {
+        "name": "strings",
+        "values": [
+          "100",
+          "15",
+          "150",
+          "160",
+          "25",
+          "car",
+          "gold",
+          "plane",
+          "silver",
+          "ゴールド",
+          "車",
+          "飛行機",
+          "😁",
+          "😃",
+          "😇"
+        ]
       }
     ],
     "seriesList": [
@@ -87,6 +107,144 @@
           3,
           2,
           1
+        ]
+      },
+      {
+        "name": "node_attribute_stats_0",
+        "values": [
+          4,
+          0
+        ]
+      },
+      {
+        "name": "edge_attribute_stats_0",
+        "values": [
+          1,
+          3
+        ]
+      },
+      {
+        "name": "edge_attribute_0",
+        "values": [
+          0,
+          2,
+          2,
+          -1
+        ]
+      },
+      {
+        "name": "edge_attribute_size_0",
+        "values": [
+          3,
+          3,
+          3,
+          0
+        ]
+      },
+      {
+        "name": "node_attribute_stats_1",
+        "values": [
+          4,
+          0
+        ]
+      },
+      {
+        "name": "edge_attribute_stats_1",
+        "values": [
+          4,
+          0
+        ]
+      },
+      {
+        "name": "node_attribute_stats_2",
+        "values": [
+          4,
+          0
+        ]
+      },
+      {
+        "name": "edge_attribute_stats_2",
+        "values": [
+          4,
+          0
+        ]
+      },
+      {
+        "name": "node_attribute_stats_3",
+        "values": [
+          0,
+          4
+        ]
+      },
+      {
+        "name": "node_attribute_3",
+        "values": [
+          5,
+          7,
+          6,
+          8
+        ]
+      },
+      {
+        "name": "node_attribute_size_3",
+        "values": [
+          3,
+          5,
+          4,
+          6
+        ]
+      },
+      {
+        "name": "edge_attribute_stats_3",
+        "values": [
+          4,
+          0
+        ]
+      },
+      {
+        "name": "node_attribute_stats_4",
+        "values": [
+          4,
+          0
+        ]
+      },
+      {
+        "name": "edge_attribute_stats_4",
+        "values": [
+          1,
+          3
+        ]
+      },
+      {
+        "name": "edge_attribute_4",
+        "values": [
+          4,
+          1,
+          -1,
+          3
+        ]
+      },
+      {
+        "name": "edge_attribute_size_4",
+        "values": [
+          2,
+          2,
+          0,
+          3
+        ]
+      },
+      {
+        "name": "node_attribute_stats_5",
+        "values": [
+          4,
+          0
+        ]
+      },
+      {
+        "name": "edge_attribute_stats_5",
+        "values": [
+          4,
+          0
         ]
       }
     ]
