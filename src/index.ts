@@ -38,33 +38,69 @@ interface Graph {
   edgeList: Edge[];
 }
 
+enum FieldEnum {
+  ValueField,
+  OptValueZeroField,
+  OptValueOneField,
+  OptValueTwoField,
+  OptValueThreeField,
+  OptValueFourField,
+  TagSetField,
+  NameField,
+  AlternateNameField,
+  UnitTextField,
+  MetaTagSetField,
+  FromNodeField,
+  ToNodeField,
+}
+
+const fieldEnumMap = new Map<FieldEnum, string>();
+fieldEnumMap.set(FieldEnum.ValueField, 'value');
+fieldEnumMap.set(FieldEnum.OptValueZeroField, 'opt_value_zero');
+fieldEnumMap.set(FieldEnum.OptValueOneField, 'opt_value_one');
+fieldEnumMap.set(FieldEnum.OptValueTwoField, 'opt_value_two');
+fieldEnumMap.set(FieldEnum.OptValueThreeField, 'opt_value_three');
+fieldEnumMap.set(FieldEnum.OptValueFourField, 'opt_value_four');
+fieldEnumMap.set(FieldEnum.TagSetField, 'tags');
+fieldEnumMap.set(FieldEnum.NameField, 'name');
+fieldEnumMap.set(FieldEnum.AlternateNameField, 'alt_name');
+fieldEnumMap.set(FieldEnum.UnitTextField, 'unit_text');
+fieldEnumMap.set(FieldEnum.MetaTagSetField, 'meta_tags');
+fieldEnumMap.set(FieldEnum.FromNodeField, 'from_node');
+fieldEnumMap.set(FieldEnum.ToNodeField, 'to_node');
+
+enum SectionEnum {
+  MetaSection,
+  NodeSection,
+  EdgeSection,
+}
+
+const sectionEnumMap = new Map<SectionEnum, string>();
+sectionEnumMap.set(SectionEnum.MetaSection, 'meta');
+sectionEnumMap.set(SectionEnum.NodeSection, 'node');
+sectionEnumMap.set(SectionEnum.EdgeSection, 'edge');
+
 interface Series {
   name: string;
+  sectionId: SectionEnum;
+  fieldId: FieldEnum;
+  attributeId: number;
   values: number[];
+  used: number;
+  unused: number;
+}
+
+interface SeriesPath {
+  sectionId: SectionEnum;
+  fieldId: FieldEnum;
+  attributeId: number;
+  custom: string;
 }
 
 interface StringSeries {
   name: string;
   values: string[];
 }
-
-// const seriesNameList = [
-//   'attribute_id',
-//   'node_id',
-//   'node_attribute_id',
-//   'node_name_id',
-//   'node_alternate_id',
-//   'node_unit_text_id',
-//   'node_value_id',
-//   'edge_from_node_id',
-//   'edge_to_node_id',
-//   'edge_attribute_id',
-//   'edge_name_id',
-//   'edge_alternate_id',
-//   'edge_unit_text_id',
-//   'edge_value_id',
-// ];
-// const stringSeriesNameList = ['anystring', 'unit_text', 'tag'];
 
 interface DataGraph {
   stringSeriesList: StringSeries[];
@@ -75,6 +111,23 @@ interface GraphContext {
   supportedTags: string[];
 }
 
+type ColumnTransformer = (
+  meta: AttributeMetadata,
+  attribute: Attribute,
+  value: string
+) => number;
+
+interface ColumnPathTransformer {
+  path: SeriesPath;
+  defaultValue: number;
+  columnTransf: ColumnTransformer;
+}
+
+const makeSeriesName = (sp: SeriesPath): string => {
+  return `${sectionEnumMap.get(sp.sectionId)}_${fieldEnumMap.get(sp.fieldId)}_${
+    sp.attributeId
+  }_${sp.custom}`;
+};
 const parseAsGraph = (content: string): Graph => JSON.parse(content);
 
 const asStringSet = (items: string[]) =>
@@ -88,186 +141,99 @@ const indexMap = (values: string[]): Map<string, number> => {
   return resultMap;
 };
 
-type AttributeTransformer = (attribute: Attribute) => number;
-type StringValueTransformer = (value: string) => number;
+const getAttributeString = (
+  meta: AttributeMetadata,
+  attribute: Attribute,
+  fieldId: FieldEnum
+): string => {
+  switch (fieldId) {
+    case FieldEnum.ValueField:
+      return attribute.value;
+    case FieldEnum.OptValueZeroField:
+      return attribute.optionalValueList.length > 0
+        ? attribute.optionalValueList[0]
+        : '';
+    case FieldEnum.OptValueOneField:
+      return attribute.optionalValueList.length > 1
+        ? attribute.optionalValueList[1]
+        : '';
+    case FieldEnum.OptValueTwoField:
+      return attribute.optionalValueList.length > 2
+        ? attribute.optionalValueList[2]
+        : '';
+    case FieldEnum.OptValueThreeField:
+      return attribute.optionalValueList.length > 3
+        ? attribute.optionalValueList[3]
+        : '';
+    case FieldEnum.OptValueFourField:
+      return attribute.optionalValueList.length > 4
+        ? attribute.optionalValueList[4]
+        : '';
+    case FieldEnum.TagSetField:
+      return attribute.tagSet.join(';');
+    case FieldEnum.NameField:
+      return meta.name;
+    case FieldEnum.AlternateNameField:
+      return meta.alternateName;
+    case FieldEnum.UnitTextField:
+      return meta.unitText;
+    case FieldEnum.MetaTagSetField:
+      return meta.tagSet.join(';');
+    case FieldEnum.FromNodeField:
+      return '';
+    case FieldEnum.ToNodeField:
+      return '';
+  }
+};
 
-const rangeNumber = (start: number, end: number): number[] =>
-  Array.from({ length: end - start + 1 }, (_, i) => i);
+const transform4Node = (graph: Graph) => (
+  pTransformer: ColumnPathTransformer
+): Series => {
+  const values: number[] = [];
+  let used = 0;
+  let unused = 0;
+  const attrId = pTransformer.path.attributeId;
+  const attrMeta = graph.attributeMetadataList[attrId];
+  for (const iNode of graph.nodeList) {
+    const maybeAttribute = iNode.attributeList.find(a => a.id === attrMeta.id);
+    if (maybeAttribute === undefined) {
+      unused++;
+      values.push(pTransformer.defaultValue);
+    } else {
+      const targetValue = getAttributeString(
+        attrMeta,
+        maybeAttribute,
+        pTransformer.path.fieldId
+      );
+      if (targetValue === '') {
+        unused++;
+        values.push(pTransformer.defaultValue);
+      } else {
+        used++;
+        const value = pTransformer.columnTransf(
+          attrMeta,
+          maybeAttribute,
+          targetValue
+        );
+        values.push(value);
+      }
+    }
+  }
+  return {
+    name: makeSeriesName(pTransformer.path),
+    sectionId: pTransformer.path.sectionId,
+    fieldId: pTransformer.path.fieldId,
+    attributeId: pTransformer.path.attributeId,
+    values,
+    used,
+    unused,
+  };
+};
 
-const mapNodeAttribute = (
+const map4Node = (
   graph: Graph,
-  name: string,
-  defaultValue: number,
-  excludeColumns: Set<number>,
-  aTransf: AttributeTransformer
-): Series[] => {
-  const resultsNode: Series[] = [];
-  graph.attributeMetadataList.forEach((iAttr, aId) => {
-    const excluded = new Set(excludeColumns);
-    if (!excluded.has(aId)) {
-      const nodeColumnValues: number[] = [];
-      // Check all nodes
-      for (const iNode of graph.nodeList) {
-        const maybeAttribute = iNode.attributeList.find(a => a.id === iAttr.id);
-        const numValue =
-          maybeAttribute === undefined ? defaultValue : aTransf(maybeAttribute);
-        nodeColumnValues.push(numValue);
-      }
-      resultsNode.push({
-        name: `node_attribute_${name}_${aId}`,
-        values: nodeColumnValues,
-      });
-    }
-  });
-  return resultsNode;
-};
-
-const mapNodeAttributeAltValues = (
-  graph: Graph,
-  name: string,
-  defaultValue: number,
-  maxAltValuesByColumn: number[],
-  aTransf: StringValueTransformer
-): Series[] => {
-  const resultsNode: Series[] = [];
-  graph.attributeMetadataList.forEach((iAttr, aId) => {
-    const maxLength = maxAltValuesByColumn[aId];
-    for (let index = 0; index < maxLength; index++) {
-      const nodeColumnValues: number[] = [];
-      for (const iNode of graph.nodeList) {
-        const maybeAttribute = iNode.attributeList.find(a => a.id === iAttr.id);
-        const numValue =
-          maybeAttribute === undefined
-            ? defaultValue
-            : aTransf(maybeAttribute.optionalValueList[index]);
-        nodeColumnValues.push(numValue);
-      }
-      resultsNode.push({
-        name: `node_attribute_opt_values_${index}_${name}_${aId}`,
-        values: nodeColumnValues,
-      });
-    }
-  });
-  return resultsNode;
-};
-
-const getUnusedNodeAttributes = (graph: Graph): Set<number> => {
-  const unused = new Set(
-    rangeNumber(0, graph.attributeMetadataList.length - 1)
-  );
-  graph.attributeMetadataList.forEach((iAttr, aId) => {
-    // Check all nodes
-    for (const iNode of graph.nodeList) {
-      const maybeAttribute = iNode.attributeList.find(a => a.id === iAttr.id);
-      if (maybeAttribute !== undefined) {
-        unused.delete(aId);
-        break;
-      }
-    }
-  });
-  return unused;
-};
-
-const getAltValuesMaxNodeAttributes = (graph: Graph): number[] => {
-  const maxForAttrs = new Array(graph.attributeMetadataList.length).fill(0);
-  graph.attributeMetadataList.forEach((iAttr, aId) => {
-    for (const iNode of graph.nodeList) {
-      const maybeAttribute = iNode.attributeList.find(a => a.id === iAttr.id);
-      if (maybeAttribute !== undefined) {
-        const countAltValues = maybeAttribute.optionalValueList.length;
-        maxForAttrs[aId] = Math.max(maxForAttrs[aId], countAltValues);
-      }
-    }
-  });
-  return maxForAttrs;
-};
-
-const mapEdgeAttribute = (
-  graph: Graph,
-  name: string,
-  defaultValue: number,
-  excludeColumns: Set<number>,
-  aTransf: AttributeTransformer
-): Series[] => {
-  const resultsNode: Series[] = [];
-  graph.attributeMetadataList.forEach((iAttr, aId) => {
-    const excluded = new Set(excludeColumns);
-    if (!excluded.has(aId)) {
-      const nodeColumnValues: number[] = [];
-      // Check all edges
-      for (const iNode of graph.edgeList) {
-        const maybeAttribute = iNode.attributeList.find(a => a.id === iAttr.id);
-        const numValue =
-          maybeAttribute === undefined ? defaultValue : aTransf(maybeAttribute);
-        nodeColumnValues.push(numValue);
-      }
-      resultsNode.push({
-        name: `edge_attribute_${name}_${aId}`,
-        values: nodeColumnValues,
-      });
-    }
-  });
-  return resultsNode;
-};
-
-const mapEdgeAttributeAltValues = (
-  graph: Graph,
-  name: string,
-  defaultValue: number,
-  maxAltValuesByColumn: number[],
-  aTransf: StringValueTransformer
-): Series[] => {
-  const resultsNode: Series[] = [];
-  graph.attributeMetadataList.forEach((iAttr, aId) => {
-    const maxLength = maxAltValuesByColumn[aId];
-    for (let index = 0; index < maxLength; index++) {
-      const nodeColumnValues: number[] = [];
-      for (const iEdge of graph.edgeList) {
-        const maybeAttribute = iEdge.attributeList.find(a => a.id === iAttr.id);
-        const numValue =
-          maybeAttribute === undefined
-            ? defaultValue
-            : aTransf(maybeAttribute.optionalValueList[index]);
-        nodeColumnValues.push(numValue);
-      }
-      resultsNode.push({
-        name: `edge_attribute_opt_values_${index}_${name}_${aId}`,
-        values: nodeColumnValues,
-      });
-    }
-  });
-  return resultsNode;
-};
-
-const getUnusedEdgeAttributes = (graph: Graph): Set<number> => {
-  const unused = new Set(
-    rangeNumber(0, graph.attributeMetadataList.length - 1)
-  );
-  graph.attributeMetadataList.forEach((iAttr, aId) => {
-    for (const iEdge of graph.edgeList) {
-      const maybeAttribute = iEdge.attributeList.find(a => a.id === iAttr.id);
-      if (maybeAttribute !== undefined) {
-        unused.delete(aId);
-        break;
-      }
-    }
-  });
-  return unused;
-};
-
-const getAltValuesMaxEdgeAttributes = (graph: Graph): number[] => {
-  const maxForAttrs = new Array(graph.attributeMetadataList.length).fill(0);
-  graph.attributeMetadataList.forEach((iAttr, aId) => {
-    for (const iEdge of graph.edgeList) {
-      const maybeAttribute = iEdge.attributeList.find(a => a.id === iAttr.id);
-      if (maybeAttribute !== undefined) {
-        const countAltValues = maybeAttribute.optionalValueList.length;
-        maxForAttrs[aId] = Math.max(maxForAttrs[aId], countAltValues);
-      }
-    }
-  });
-  return maxForAttrs;
-};
+  transformers: ColumnPathTransformer[]
+): Series[] => transformers.map(transform4Node(graph));
 
 const valueOrDefault = <T>(defaultValue: T) => (value: T | undefined) =>
   value === undefined ? defaultValue : value;
@@ -316,20 +282,25 @@ const toDataGraph = (ctx: GraphContext, graph: Graph): DataGraph => {
   const stringValueList = [...stringValueSet].sort();
   const idxStringMap = indexMap(stringValueList);
 
-  const excludedNodeAttributes = getUnusedNodeAttributes(graph);
-  const excludedEdgeAttributes = getUnusedEdgeAttributes(graph);
-  const maxAltValuesNode = getAltValuesMaxNodeAttributes(graph);
-  const maxAltValuesEdge = getAltValuesMaxEdgeAttributes(graph);
-
   const valueOrNeg = valueOrDefault(-1);
 
-  const attrValueTranf: AttributeTransformer = (attribute: Attribute) =>
-    valueOrNeg(idxStringMap.get(attribute.value));
-  const attrValueLengthTranf: AttributeTransformer = (attribute: Attribute) =>
-    attribute.value.length;
-
-  const stringAttrValueTranf: StringValueTransformer = (value: string) =>
-    valueOrNeg(idxStringMap.get(value));
+  const stringAttrValueTranf: ColumnTransformer = (
+    _m: AttributeMetadata,
+    _a: Attribute,
+    value: string
+  ) => valueOrNeg(idxStringMap.get(value));
+  const nodeTransf: ColumnPathTransformer[] = [
+    {
+      path: {
+        sectionId: SectionEnum.NodeSection,
+        fieldId: FieldEnum.ValueField,
+        attributeId: 0,
+        custom: 'value',
+      },
+      defaultValue: -1,
+      columnTransf: stringAttrValueTranf,
+    },
+  ];
 
   const results = {
     stringSeriesList: [
@@ -370,66 +341,22 @@ const toDataGraph = (ctx: GraphContext, graph: Graph): DataGraph => {
       {
         name: 'from_node_id',
         values: fromNodeIdList,
+        sectionId: SectionEnum.EdgeSection,
+        fieldId: FieldEnum.FromNodeField,
+        attributeId: 0,
+        used: fromNodeIdList.length,
+        unused: 0,
       },
       {
         name: 'to_node_id',
         values: toNodeIdList,
+        sectionId: SectionEnum.EdgeSection,
+        fieldId: FieldEnum.ToNodeField,
+        attributeId: 0,
+        used: fromNodeIdList.length,
+        unused: 0,
       },
-    ]
-      .concat(
-        mapNodeAttribute(
-          graph,
-          'value',
-          -1,
-          excludedNodeAttributes,
-          attrValueTranf
-        )
-      )
-      .concat(
-        mapNodeAttribute(
-          graph,
-          'size',
-          -1,
-          excludedNodeAttributes,
-          attrValueLengthTranf
-        )
-      )
-      .concat(
-        mapEdgeAttribute(
-          graph,
-          'value',
-          -1,
-          excludedEdgeAttributes,
-          attrValueTranf
-        )
-      )
-      .concat(
-        mapEdgeAttribute(
-          graph,
-          'size',
-          -1,
-          excludedEdgeAttributes,
-          attrValueLengthTranf
-        )
-      )
-      .concat(
-        mapNodeAttributeAltValues(
-          graph,
-          'value',
-          -1,
-          maxAltValuesNode,
-          stringAttrValueTranf
-        )
-      )
-      .concat(
-        mapEdgeAttributeAltValues(
-          graph,
-          'value',
-          -1,
-          maxAltValuesEdge,
-          stringAttrValueTranf
-        )
-      ),
+    ].concat(map4Node(graph, nodeTransf)),
   };
   return results;
 };
