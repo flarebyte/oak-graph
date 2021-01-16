@@ -89,6 +89,7 @@ const indexMap = (values: string[]): Map<string, number> => {
 };
 
 type AttributeTransformer = (attribute: Attribute) => number;
+type StringValueTransformer = (value: string) => number;
 
 const rangeNumber = (start: number, end: number): number[] =>
   Array.from({ length: end - start + 1 }, (_, i) => i);
@@ -121,6 +122,35 @@ const mapNodeAttribute = (
   return resultsNode;
 };
 
+const mapNodeAttributeAltValues = (
+  graph: Graph,
+  name: string,
+  defaultValue: number,
+  maxAltValuesByColumn: number[],
+  aTransf: StringValueTransformer
+): Series[] => {
+  const resultsNode: Series[] = [];
+  graph.attributeMetadataList.forEach((iAttr, aId) => {
+    const maxLength = maxAltValuesByColumn[aId];
+    for (let index = 0; index < maxLength; index++) {
+      const nodeColumnValues: number[] = [];
+      for (const iNode of graph.nodeList) {
+        const maybeAttribute = iNode.attributeList.find(a => a.id === iAttr.id);
+        const numValue =
+          maybeAttribute === undefined
+            ? defaultValue
+            : aTransf(maybeAttribute.optionalValueList[index]);
+        nodeColumnValues.push(numValue);
+      }
+      resultsNode.push({
+        name: `node_attribute_opt_values_${index}_${name}_${aId}`,
+        values: nodeColumnValues,
+      });
+    }
+  });
+  return resultsNode;
+};
+
 const getUnusedNodeAttributes = (graph: Graph): Set<number> => {
   const unused = new Set(
     rangeNumber(0, graph.attributeMetadataList.length - 1)
@@ -136,6 +166,20 @@ const getUnusedNodeAttributes = (graph: Graph): Set<number> => {
     }
   });
   return unused;
+};
+
+const getAltValuesMaxNodeAttributes = (graph: Graph): number[] => {
+  const maxForAttrs = new Array(graph.attributeMetadataList.length).fill(0);
+  graph.attributeMetadataList.forEach((iAttr, aId) => {
+    for (const iNode of graph.nodeList) {
+      const maybeAttribute = iNode.attributeList.find(a => a.id === iAttr.id);
+      if (maybeAttribute !== undefined) {
+        const countAltValues = maybeAttribute.optionalValueList.length;
+        maxForAttrs[aId] = Math.max(maxForAttrs[aId], countAltValues);
+      }
+    }
+  });
+  return maxForAttrs;
 };
 
 const mapEdgeAttribute = (
@@ -166,12 +210,40 @@ const mapEdgeAttribute = (
   return resultsNode;
 };
 
+const mapEdgeAttributeAltValues = (
+  graph: Graph,
+  name: string,
+  defaultValue: number,
+  maxAltValuesByColumn: number[],
+  aTransf: StringValueTransformer
+): Series[] => {
+  const resultsNode: Series[] = [];
+  graph.attributeMetadataList.forEach((iAttr, aId) => {
+    const maxLength = maxAltValuesByColumn[aId];
+    for (let index = 0; index < maxLength; index++) {
+      const nodeColumnValues: number[] = [];
+      for (const iEdge of graph.edgeList) {
+        const maybeAttribute = iEdge.attributeList.find(a => a.id === iAttr.id);
+        const numValue =
+          maybeAttribute === undefined
+            ? defaultValue
+            : aTransf(maybeAttribute.optionalValueList[index]);
+        nodeColumnValues.push(numValue);
+      }
+      resultsNode.push({
+        name: `edge_attribute_opt_values_${index}_${name}_${aId}`,
+        values: nodeColumnValues,
+      });
+    }
+  });
+  return resultsNode;
+};
+
 const getUnusedEdgeAttributes = (graph: Graph): Set<number> => {
   const unused = new Set(
     rangeNumber(0, graph.attributeMetadataList.length - 1)
   );
   graph.attributeMetadataList.forEach((iAttr, aId) => {
-    // Check all nodes
     for (const iEdge of graph.edgeList) {
       const maybeAttribute = iEdge.attributeList.find(a => a.id === iAttr.id);
       if (maybeAttribute !== undefined) {
@@ -181,6 +253,20 @@ const getUnusedEdgeAttributes = (graph: Graph): Set<number> => {
     }
   });
   return unused;
+};
+
+const getAltValuesMaxEdgeAttributes = (graph: Graph): number[] => {
+  const maxForAttrs = new Array(graph.attributeMetadataList.length).fill(0);
+  graph.attributeMetadataList.forEach((iAttr, aId) => {
+    for (const iEdge of graph.edgeList) {
+      const maybeAttribute = iEdge.attributeList.find(a => a.id === iAttr.id);
+      if (maybeAttribute !== undefined) {
+        const countAltValues = maybeAttribute.optionalValueList.length;
+        maxForAttrs[aId] = Math.max(maxForAttrs[aId], countAltValues);
+      }
+    }
+  });
+  return maxForAttrs;
 };
 
 const valueOrDefault = <T>(defaultValue: T) => (value: T | undefined) =>
@@ -232,6 +318,8 @@ const toDataGraph = (ctx: GraphContext, graph: Graph): DataGraph => {
 
   const excludedNodeAttributes = getUnusedNodeAttributes(graph);
   const excludedEdgeAttributes = getUnusedEdgeAttributes(graph);
+  const maxAltValuesNode = getAltValuesMaxNodeAttributes(graph);
+  const maxAltValuesEdge = getAltValuesMaxEdgeAttributes(graph);
 
   const valueOrNeg = valueOrDefault(-1);
 
@@ -239,6 +327,9 @@ const toDataGraph = (ctx: GraphContext, graph: Graph): DataGraph => {
     valueOrNeg(idxStringMap.get(attribute.value));
   const attrValueLengthTranf: AttributeTransformer = (attribute: Attribute) =>
     attribute.value.length;
+
+  const stringAttrValueTranf: StringValueTransformer = (value: string) =>
+    valueOrNeg(idxStringMap.get(value));
 
   const results = {
     stringSeriesList: [
@@ -319,6 +410,24 @@ const toDataGraph = (ctx: GraphContext, graph: Graph): DataGraph => {
           -1,
           excludedEdgeAttributes,
           attrValueLengthTranf
+        )
+      )
+      .concat(
+        mapNodeAttributeAltValues(
+          graph,
+          'value',
+          -1,
+          maxAltValuesNode,
+          stringAttrValueTranf
+        )
+      )
+      .concat(
+        mapEdgeAttributeAltValues(
+          graph,
+          'value',
+          -1,
+          maxAltValuesEdge,
+          stringAttrValueTranf
         )
       ),
   };
