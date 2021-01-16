@@ -120,18 +120,18 @@
         "unused": 0
       },
       {
-        "name": "node_value_0_value",
+        "name": "node_value_3_value",
         "sectionId": 1,
         "fieldId": 0,
-        "attributeId": 0,
+        "attributeId": 3,
         "values": [
-          -1,
-          -1,
-          -1,
-          -1
+          5,
+          7,
+          6,
+          8
         ],
-        "used": 0,
-        "unused": 4
+        "used": 4,
+        "unused": 0
       }
     ]
   }

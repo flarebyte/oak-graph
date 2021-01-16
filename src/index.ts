@@ -294,7 +294,7 @@ const toDataGraph = (ctx: GraphContext, graph: Graph): DataGraph => {
       path: {
         sectionId: SectionEnum.NodeSection,
         fieldId: FieldEnum.ValueField,
-        attributeId: 0,
+        attributeId: 3,
         custom: 'value',
       },
       defaultValue: -1,
