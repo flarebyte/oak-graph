@@ -28,7 +28,7 @@
   },
   "peerDependencies": {},
   "husky": {
-    "hooks": {
+    "hooks2": {
       "pre-commit": "yarn lint && yarn test",
       "prepublishOnly": "yarn size"
     }

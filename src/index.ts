@@ -17,6 +17,9 @@ interface Attribute extends Taggable {
   tagSet: string[];
 }
 
+interface Row {
+  cols: string[];
+}
 interface WithAttributeList {
   attributeList: Attribute[];
 }
@@ -43,31 +46,58 @@ enum FieldEnum {
   OptValueZeroField,
   OptValueOneField,
   OptValueTwoField,
-  OptValueThreeField,
-  OptValueFourField,
   TagSetField,
   NameField,
   AlternateNameField,
   UnitTextField,
   MetaTagSetField,
-  FromNodeField,
-  ToNodeField,
+  MetaIdField,
+  FromNodeIdField,
+  ToNodeIdField,
+  NodeIdField,
 }
+
+const nodeFields = [
+  FieldEnum.NodeIdField,
+  FieldEnum.ValueField,
+  FieldEnum.OptValueZeroField,
+  FieldEnum.OptValueOneField,
+  FieldEnum.OptValueTwoField,
+  FieldEnum.TagSetField,
+  FieldEnum.MetaIdField,
+  FieldEnum.NameField,
+  FieldEnum.AlternateNameField,
+  FieldEnum.UnitTextField,
+  FieldEnum.MetaTagSetField,
+];
+
+const edgeFields = [
+  FieldEnum.FromNodeIdField,
+  FieldEnum.ToNodeIdField,
+  FieldEnum.ValueField,
+  FieldEnum.OptValueZeroField,
+  FieldEnum.OptValueOneField,
+  FieldEnum.OptValueTwoField,
+  FieldEnum.TagSetField,
+  FieldEnum.MetaIdField,
+  FieldEnum.NameField,
+  FieldEnum.AlternateNameField,
+  FieldEnum.UnitTextField,
+  FieldEnum.MetaTagSetField,
+];
 
 const fieldEnumMap = new Map<FieldEnum, string>();
 fieldEnumMap.set(FieldEnum.ValueField, 'value');
 fieldEnumMap.set(FieldEnum.OptValueZeroField, 'opt_value_zero');
 fieldEnumMap.set(FieldEnum.OptValueOneField, 'opt_value_one');
 fieldEnumMap.set(FieldEnum.OptValueTwoField, 'opt_value_two');
-fieldEnumMap.set(FieldEnum.OptValueThreeField, 'opt_value_three');
-fieldEnumMap.set(FieldEnum.OptValueFourField, 'opt_value_four');
 fieldEnumMap.set(FieldEnum.TagSetField, 'tags');
 fieldEnumMap.set(FieldEnum.NameField, 'name');
 fieldEnumMap.set(FieldEnum.AlternateNameField, 'alt_name');
 fieldEnumMap.set(FieldEnum.UnitTextField, 'unit_text');
 fieldEnumMap.set(FieldEnum.MetaTagSetField, 'meta_tags');
-fieldEnumMap.set(FieldEnum.FromNodeField, 'from_node');
-fieldEnumMap.set(FieldEnum.ToNodeField, 'to_node');
+fieldEnumMap.set(FieldEnum.FromNodeIdField, 'from_node');
+fieldEnumMap.set(FieldEnum.ToNodeIdField, 'to_node');
 
 enum SectionEnum {
   MetaSection,
@@ -107,6 +137,11 @@ interface DataGraph {
   seriesList: Series[];
 }
 
+interface TabularGraph {
+  nodes: Row[];
+  edges: Row[];
+}
+
 interface GraphContext {
   supportedTags: string[];
 }
@@ -141,52 +176,7 @@ const indexMap = (values: string[]): Map<string, number> => {
   return resultMap;
 };
 
-const getAttributeString = (
-  meta: AttributeMetadata,
-  attribute: Attribute,
-  fieldId: FieldEnum
-): string => {
-  switch (fieldId) {
-    case FieldEnum.ValueField:
-      return attribute.value;
-    case FieldEnum.OptValueZeroField:
-      return attribute.optionalValueList.length > 0
-        ? attribute.optionalValueList[0]
-        : '';
-    case FieldEnum.OptValueOneField:
-      return attribute.optionalValueList.length > 1
-        ? attribute.optionalValueList[1]
-        : '';
-    case FieldEnum.OptValueTwoField:
-      return attribute.optionalValueList.length > 2
-        ? attribute.optionalValueList[2]
-        : '';
-    case FieldEnum.OptValueThreeField:
-      return attribute.optionalValueList.length > 3
-        ? attribute.optionalValueList[3]
-        : '';
-    case FieldEnum.OptValueFourField:
-      return attribute.optionalValueList.length > 4
-        ? attribute.optionalValueList[4]
-        : '';
-    case FieldEnum.TagSetField:
-      return attribute.tagSet.join(';');
-    case FieldEnum.NameField:
-      return meta.name;
-    case FieldEnum.AlternateNameField:
-      return meta.alternateName;
-    case FieldEnum.UnitTextField:
-      return meta.unitText;
-    case FieldEnum.MetaTagSetField:
-      return meta.tagSet.join(';');
-    case FieldEnum.FromNodeField:
-      return '';
-    case FieldEnum.ToNodeField:
-      return '';
-  }
-};
-
-const transform4Node = (graph: Graph) => (
+const _oldtransform4Node = (graph: Graph) => (
   pTransformer: ColumnPathTransformer
 ): Series => {
   const values: number[] = [];
@@ -200,11 +190,12 @@ const transform4Node = (graph: Graph) => (
       unused++;
       values.push(pTransformer.defaultValue);
     } else {
-      const targetValue = getAttributeString(
-        attrMeta,
-        maybeAttribute,
-        pTransformer.path.fieldId
-      );
+      // const targetValue = getAttributeString(
+      //   attrMeta,
+      //   maybeAttribute,
+      //   pTransformer.path.fieldId
+      // );
+      const targetValue = '';
       if (targetValue === '') {
         unused++;
         values.push(pTransformer.defaultValue);
@@ -230,77 +221,135 @@ const transform4Node = (graph: Graph) => (
   };
 };
 
-const map4Node = (
-  graph: Graph,
-  transformers: ColumnPathTransformer[]
-): Series[] => transformers.map(transform4Node(graph));
+const _transform4Node = (_tabGraph: TabularGraph) => (
+  pTransformer: ColumnPathTransformer
+): Series => {
+  const values: number[] = [];
+  let used = 0;
+  let unused = 0;
 
-const valueOrDefault = <T>(defaultValue: T) => (value: T | undefined) =>
-  value === undefined ? defaultValue : value;
+  return {
+    name: makeSeriesName(pTransformer.path),
+    sectionId: pTransformer.path.sectionId,
+    fieldId: pTransformer.path.fieldId,
+    attributeId: pTransformer.path.attributeId,
+    values,
+    used,
+    unused,
+  };
+};
+// const map4Node = (
+//   graph: Graph,
+//   transformers: ColumnPathTransformer[]
+// ): Series[] => transformers.map(transform4Node(graph));
+
+const nodeToRow = (
+  attributes: AttributeMetadata[],
+  attrMap: Map<string, number>,
+  node: Node,
+  attr: Attribute
+): Row => {
+  const cols = new Array<string>(nodeFields.length);
+  const attrMeta = attributes[attrMap.get(attr.id) || 0];
+  cols[FieldEnum.NodeIdField] = node.id;
+  cols[FieldEnum.ValueField] = attr.value.trim();
+  cols[FieldEnum.OptValueZeroField] =
+    attr.optionalValueList.length > 0 ? attr.optionalValueList[0].trim() : '';
+  cols[FieldEnum.OptValueOneField] =
+    attr.optionalValueList.length > 1 ? attr.optionalValueList[1].trim() : '';
+  cols[FieldEnum.OptValueTwoField] =
+    attr.optionalValueList.length > 2 ? attr.optionalValueList[2].trim() : '';
+  cols[FieldEnum.TagSetField] = attr.tagSet.join(';');
+  cols[FieldEnum.MetaIdField] = attr.id;
+  cols[FieldEnum.NameField] = attrMeta.name.trim();
+  cols[FieldEnum.AlternateNameField] = attrMeta.alternateName.trim();
+  cols[FieldEnum.UnitTextField] = attrMeta.unitText.trim();
+  cols[FieldEnum.MetaTagSetField] = attrMeta.tagSet.join(';');
+  return { cols };
+};
+const edgeToRow = (
+  attributes: AttributeMetadata[],
+  attrMap: Map<string, number>,
+  edge: Edge,
+  attr: Attribute
+): Row => {
+  const cols = new Array<string>(edgeFields.length);
+  const attrMeta = attributes[attrMap.get(attr.id) || 0];
+  cols[FieldEnum.FromNodeIdField] = edge.fromNode;
+  cols[FieldEnum.ToNodeIdField] = edge.toNode;
+  cols[FieldEnum.ValueField] = attr.value.trim();
+  cols[FieldEnum.OptValueZeroField] =
+    attr.optionalValueList.length > 0 ? attr.optionalValueList[0].trim() : '';
+  cols[FieldEnum.OptValueOneField] =
+    attr.optionalValueList.length > 1 ? attr.optionalValueList[1].trim() : '';
+  cols[FieldEnum.OptValueTwoField] =
+    attr.optionalValueList.length > 2 ? attr.optionalValueList[2].trim() : '';
+  cols[FieldEnum.TagSetField] = attr.tagSet.join(';');
+  cols[FieldEnum.MetaIdField] = attr.id;
+  cols[FieldEnum.NameField] = attrMeta.name.trim();
+  cols[FieldEnum.AlternateNameField] = attrMeta.alternateName.trim();
+  cols[FieldEnum.UnitTextField] = attrMeta.unitText.trim();
+  cols[FieldEnum.MetaTagSetField] = attrMeta.tagSet.join(';');
+  return { cols };
+};
+
+const toTabularGraph = (_ctx: GraphContext, graph: Graph): TabularGraph => {
+  const attributeIdList = graph.attributeMetadataList.map(v => v.id);
+  const idxAttributeIdMap = indexMap(attributeIdList);
+  const nodes: Row[] = [];
+  const edges: Row[] = [];
+  for (const node of graph.nodeList) {
+    for (const attr of node.attributeList) {
+      const tabNodeAttr = nodeToRow(
+        graph.attributeMetadataList,
+        idxAttributeIdMap,
+        node,
+        attr
+      );
+      nodes.push(tabNodeAttr);
+    }
+  }
+  for (const edge of graph.edgeList) {
+    for (const attr of edge.attributeList) {
+      const tabEdgeAttr = edgeToRow(
+        graph.attributeMetadataList,
+        idxAttributeIdMap,
+        edge,
+        attr
+      );
+      edges.push(tabEdgeAttr);
+    }
+  }
+  return { nodes, edges };
+};
 
 const toDataGraph = (ctx: GraphContext, graph: Graph): DataGraph => {
   const unitTextSet = asStringSet(
     graph.attributeMetadataList.map(v => v.unitText.trim())
   );
-
   const unitTextList = [...unitTextSet].sort();
-  // const idxUnitTextMap = indexMap(unitTextList);
+  const idxUnitTextMap = indexMap(unitTextList);
 
   const nodeIdList = graph.nodeList.map(v => v.id);
   const idxNodeIdMap = indexMap(nodeIdList);
 
-  const fromNodeIdList = graph.edgeList.map(v =>
-    valueOrDefault(-1)(idxNodeIdMap.get(v.fromNode))
-  );
-  const toNodeIdList = graph.edgeList.map(v =>
-    valueOrDefault(-1)(idxNodeIdMap.get(v.toNode))
-  );
+  const attributeIdList: string[] = graph.attributeMetadataList.map(v => v.id);
 
-  const attributeIdList = graph.attributeMetadataList.map(v => v.id);
-  //const idxAttributeIdMap = indexMap(attributeIdList);
+  const tabGraph = toTabularGraph(ctx, graph);
 
-  // TODO: trim
-  const allNodeValues = graph.nodeList
-    .flatMap(n => n.attributeList)
-    .map(a => a.value);
-  const allNodeOptValues = graph.nodeList
-    .flatMap(n => n.attributeList)
-    .flatMap(a => a.optionalValueList);
-  const allEdgeValues = graph.edgeList
-    .flatMap(n => n.attributeList)
-    .map(a => a.value);
-  const allEdgeOptValues = graph.edgeList
-    .flatMap(n => n.attributeList)
-    .flatMap(a => a.optionalValueList);
+  const prepStringList: string[] = tabGraph.nodes
+    .map(row => row.cols[FieldEnum.ValueField])
+    .concat(tabGraph.nodes.map(row => row.cols[FieldEnum.OptValueZeroField]))
+    .concat(tabGraph.nodes.map(row => row.cols[FieldEnum.OptValueOneField]))
+    .concat(tabGraph.nodes.map(row => row.cols[FieldEnum.OptValueTwoField]))
+    .concat(tabGraph.edges.map(row => row.cols[FieldEnum.ValueField]))
+    .concat(tabGraph.edges.map(row => row.cols[FieldEnum.OptValueZeroField]))
+    .concat(tabGraph.edges.map(row => row.cols[FieldEnum.OptValueOneField]))
+    .concat(tabGraph.edges.map(row => row.cols[FieldEnum.OptValueTwoField]));
 
-  const stringValueSet = new Set(
-    allNodeValues
-      .concat(allNodeOptValues)
-      .concat(allEdgeValues)
-      .concat(allEdgeOptValues)
-  );
+  const stringValueSet = new Set(prepStringList);
   const stringValueList = [...stringValueSet].sort();
   const idxStringMap = indexMap(stringValueList);
-
-  const valueOrNeg = valueOrDefault(-1);
-
-  const stringAttrValueTranf: ColumnTransformer = (
-    _m: AttributeMetadata,
-    _a: Attribute,
-    value: string
-  ) => valueOrNeg(idxStringMap.get(value));
-  const nodeTransf: ColumnPathTransformer[] = [
-    {
-      path: {
-        sectionId: SectionEnum.NodeSection,
-        fieldId: FieldEnum.ValueField,
-        attributeId: 3,
-        custom: 'value',
-      },
-      defaultValue: -1,
-      columnTransf: stringAttrValueTranf,
-    },
-  ];
 
   const results = {
     stringSeriesList: [
@@ -337,28 +386,9 @@ const toDataGraph = (ctx: GraphContext, graph: Graph): DataGraph => {
         values: stringValueList,
       },
     ],
-    seriesList: [
-      {
-        name: 'from_node_id',
-        values: fromNodeIdList,
-        sectionId: SectionEnum.EdgeSection,
-        fieldId: FieldEnum.FromNodeField,
-        attributeId: 0,
-        used: fromNodeIdList.length,
-        unused: 0,
-      },
-      {
-        name: 'to_node_id',
-        values: toNodeIdList,
-        sectionId: SectionEnum.EdgeSection,
-        fieldId: FieldEnum.ToNodeField,
-        attributeId: 0,
-        used: fromNodeIdList.length,
-        unused: 0,
-      },
-    ].concat(map4Node(graph, nodeTransf)),
+    seriesList: [],
   };
   return results;
 };
 
-export { parseAsGraph, toDataGraph };
+export { parseAsGraph, toDataGraph, _transform4Node, _oldtransform4Node };
