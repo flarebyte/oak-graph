@@ -9,6 +9,9 @@ const fixtureExpectedAlphaDataGraph = require('./fixture-data-graph-alpha-expect
 
 const defaultCtx = {
   supportedTags: ['alpha', 'beta', 'delta'],
+  customNames: ['value'],
+  nodeTransformers: [],
+  edgeTransformers: [],
 };
 describe('Management of graphs and networks', () => {
   it('validate the graph format', () => {

@@ -1,137 +1,636 @@
 {
-    "stringSeriesList": [
-      {
-        "name": "tags",
-        "values": [
-          "alpha",
-          "beta",
-          "delta"
-        ]
-      },
-      {
-        "name": "unit_text",
-        "values": [
-          "GBP",
-          "km",
-          "km/h"
-        ]
-      },
-      {
-        "name": "node_id",
-        "values": [
-          "1",
-          "2",
-          "11",
-          "12"
-        ]
-      },
-      {
-        "name": "attribute_id",
-        "values": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5",
-          "6"
-        ]
-      },
-      {
-        "name": "attribute_name",
-        "values": [
-          "Speed",
-          "Real Range",
-          "Cost per km",
-          "Name",
-          "Cost per journey",
-          ""
-        ]
-      },
-      {
-        "name": "attribute_alternate_name",
-        "values": [
-          "速度",
-          "Range",
-          "",
-          "",
-          "",
-          ""
-        ]
-      },
-      {
-        "name": "attribute_unit_text",
-        "values": [
-          "km/h",
-          "km",
-          "GBP",
-          "",
-          "GBP",
-          ""
-        ]
-      },
-      {
-        "name": "strings",
-        "values": [
-          "100",
-          "15",
-          "150",
-          "160",
-          "25",
-          "car",
-          "gold",
-          "plane",
-          "silver",
-          "ゴールド",
-          "車",
-          "飛行機",
-          "😁",
-          "😃",
-          "😇"
-        ]
-      }
-    ],
-    "seriesList": [
-      {
-        "name": "from_node_id",
-        "values": [
-          0,
-          0,
-          1,
-          2
-        ],
-        "sectionId": 2,
-        "fieldId": 11,
+  "stringSeriesList": [
+    {
+      "name": "tags",
+      "values": [
+        "alpha",
+        "beta",
+        "delta"
+      ]
+    },
+    {
+      "name": "unit_text",
+      "values": [
+        "GBP",
+        "km",
+        "km/h"
+      ]
+    },
+    {
+      "name": "node_id",
+      "values": [
+        "1",
+        "2",
+        "11",
+        "12"
+      ]
+    },
+    {
+      "name": "attribute_id",
+      "values": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ]
+    },
+    {
+      "name": "attribute_name",
+      "values": [
+        "Speed",
+        "Real Range",
+        "Cost per km",
+        "Name",
+        "Cost per journey",
+        ""
+      ]
+    },
+    {
+      "name": "attribute_alternate_name",
+      "values": [
+        "速度",
+        "Range",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "name": "attribute_unit_text",
+      "values": [
+        "km/h",
+        "km",
+        "GBP",
+        "",
+        "GBP",
+        ""
+      ]
+    },
+    {
+      "name": "strings",
+      "values": [
+        "",
+        "100",
+        "15",
+        "150",
+        "160",
+        "25",
+        "car",
+        "gold",
+        "plane",
+        "silver",
+        "ゴールド",
+        "車",
+        "飛行機",
+        "😁",
+        "😃",
+        "😇"
+      ]
+    }
+  ],
+  "seriesList": [
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 0,
         "attributeId": 0,
-        "used": 4,
-        "unused": 0
+        "customId": 0
       },
-      {
-        "name": "to_node_id",
-        "values": [
-          2,
-          3,
-          2,
-          1
-        ],
-        "sectionId": 2,
-        "fieldId": 12,
-        "attributeId": 0,
-        "used": 4,
-        "unused": 0
+      "values": [
+        6,
+        8,
+        7,
+        9
+      ],
+      "unused": 0
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 0,
+        "attributeId": 1,
+        "customId": 0
       },
-      {
-        "name": "node_value_3_value",
+      "values": [
+        6,
+        8,
+        7,
+        9
+      ],
+      "unused": 0
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 0,
+        "attributeId": 2,
+        "customId": 0
+      },
+      "values": [
+        6,
+        8,
+        7,
+        9
+      ],
+      "unused": 0
+    },
+    {
+      "path": {
         "sectionId": 1,
         "fieldId": 0,
         "attributeId": 3,
-        "values": [
-          5,
-          7,
-          6,
-          8
-        ],
-        "used": 4,
-        "unused": 0
-      }
-    ]
-  }
+        "customId": 0
+      },
+      "values": [
+        6,
+        8,
+        7,
+        9
+      ],
+      "unused": 0
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 0,
+        "attributeId": 4,
+        "customId": 0
+      },
+      "values": [
+        6,
+        8,
+        7,
+        9
+      ],
+      "unused": 0
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 0,
+        "attributeId": 5,
+        "customId": 0
+      },
+      "values": [
+        6,
+        8,
+        7,
+        9
+      ],
+      "unused": 0
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 1,
+        "attributeId": 0,
+        "customId": 0
+      },
+      "values": [
+        11,
+        12,
+        10,
+        -1
+      ],
+      "unused": 1
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 1,
+        "attributeId": 1,
+        "customId": 0
+      },
+      "values": [
+        11,
+        12,
+        10,
+        -1
+      ],
+      "unused": 1
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 1,
+        "attributeId": 2,
+        "customId": 0
+      },
+      "values": [
+        11,
+        12,
+        10,
+        -1
+      ],
+      "unused": 1
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 1,
+        "attributeId": 3,
+        "customId": 0
+      },
+      "values": [
+        11,
+        12,
+        10,
+        -1
+      ],
+      "unused": 1
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 1,
+        "attributeId": 4,
+        "customId": 0
+      },
+      "values": [
+        11,
+        12,
+        10,
+        -1
+      ],
+      "unused": 1
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 1,
+        "attributeId": 5,
+        "customId": 0
+      },
+      "values": [
+        11,
+        12,
+        10,
+        -1
+      ],
+      "unused": 1
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 2,
+        "attributeId": 0,
+        "customId": 0
+      },
+      "values": [
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "unused": 4
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 2,
+        "attributeId": 1,
+        "customId": 0
+      },
+      "values": [
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "unused": 4
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 2,
+        "attributeId": 2,
+        "customId": 0
+      },
+      "values": [
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "unused": 4
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 2,
+        "attributeId": 3,
+        "customId": 0
+      },
+      "values": [
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "unused": 4
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 2,
+        "attributeId": 4,
+        "customId": 0
+      },
+      "values": [
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "unused": 4
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 2,
+        "attributeId": 5,
+        "customId": 0
+      },
+      "values": [
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "unused": 4
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 3,
+        "attributeId": 0,
+        "customId": 0
+      },
+      "values": [
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "unused": 4
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 3,
+        "attributeId": 1,
+        "customId": 0
+      },
+      "values": [
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "unused": 4
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 3,
+        "attributeId": 2,
+        "customId": 0
+      },
+      "values": [
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "unused": 4
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 3,
+        "attributeId": 3,
+        "customId": 0
+      },
+      "values": [
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "unused": 4
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 3,
+        "attributeId": 4,
+        "customId": 0
+      },
+      "values": [
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "unused": 4
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 3,
+        "attributeId": 5,
+        "customId": 0
+      },
+      "values": [
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "unused": 4
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 5,
+        "attributeId": 0,
+        "customId": 0
+      },
+      "values": [
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "unused": 0
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 5,
+        "attributeId": 1,
+        "customId": 0
+      },
+      "values": [
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "unused": 0
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 5,
+        "attributeId": 2,
+        "customId": 0
+      },
+      "values": [
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "unused": 0
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 5,
+        "attributeId": 3,
+        "customId": 0
+      },
+      "values": [
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "unused": 0
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 5,
+        "attributeId": 4,
+        "customId": 0
+      },
+      "values": [
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "unused": 0
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 5,
+        "attributeId": 5,
+        "customId": 0
+      },
+      "values": [
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "unused": 0
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 6,
+        "attributeId": 0,
+        "customId": 0
+      },
+      "values": [
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "unused": 4
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 6,
+        "attributeId": 1,
+        "customId": 0
+      },
+      "values": [
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "unused": 4
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 6,
+        "attributeId": 2,
+        "customId": 0
+      },
+      "values": [
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "unused": 4
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 6,
+        "attributeId": 3,
+        "customId": 0
+      },
+      "values": [
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "unused": 4
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 6,
+        "attributeId": 4,
+        "customId": 0
+      },
+      "values": [
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "unused": 4
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 6,
+        "attributeId": 5,
+        "customId": 0
+      },
+      "values": [
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "unused": 4
+    }
+  ]
+}
