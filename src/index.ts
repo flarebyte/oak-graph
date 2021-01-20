@@ -116,7 +116,6 @@ interface Series {
   fieldId: FieldEnum;
   attributeId: number;
   values: number[];
-  used: number;
   unused: number;
 }
 
@@ -124,7 +123,7 @@ interface SeriesPath {
   sectionId: SectionEnum;
   fieldId: FieldEnum;
   attributeId: number;
-  custom: string;
+  customId: number;
 }
 
 interface StringSeries {
@@ -142,26 +141,29 @@ interface TabularGraph {
   edges: Row[];
 }
 
-interface GraphContext {
-  supportedTags: string[];
-}
-
-type ColumnTransformer = (
-  meta: AttributeMetadata,
-  attribute: Attribute,
-  value: string
-) => number;
+type ColumnTransformer = (row: Row, value: string) => number;
 
 interface ColumnPathTransformer {
   path: SeriesPath;
-  defaultValue: number;
   columnTransf: ColumnTransformer;
 }
+interface GraphContext {
+  supportedTags: string[];
+  customNames: string[];
+  nodeTransformers: ColumnPathTransformer[];
+  edgeTransformers: ColumnPathTransformer[];
+}
+const createSeriesPath = (
+  sectionId: SectionEnum,
+  fieldId: FieldEnum,
+  attributeId: number,
+  customId: number
+): SeriesPath => ({ sectionId, fieldId, attributeId, customId });
 
 const makeSeriesName = (sp: SeriesPath): string => {
   return `${sectionEnumMap.get(sp.sectionId)}_${fieldEnumMap.get(sp.fieldId)}_${
     sp.attributeId
-  }_${sp.custom}`;
+  }_${sp.customId}`;
 };
 const parseAsGraph = (content: string): Graph => JSON.parse(content);
 
@@ -176,72 +178,28 @@ const indexMap = (values: string[]): Map<string, number> => {
   return resultMap;
 };
 
-const _oldtransform4Node = (graph: Graph) => (
+const transform4Nodes = (tabGraph: TabularGraph) => (
   pTransformer: ColumnPathTransformer
 ): Series => {
-  const values: number[] = [];
-  let used = 0;
-  let unused = 0;
-  const attrId = pTransformer.path.attributeId;
-  const attrMeta = graph.attributeMetadataList[attrId];
-  for (const iNode of graph.nodeList) {
-    const maybeAttribute = iNode.attributeList.find(a => a.id === attrMeta.id);
-    if (maybeAttribute === undefined) {
-      unused++;
-      values.push(pTransformer.defaultValue);
-    } else {
-      // const targetValue = getAttributeString(
-      //   attrMeta,
-      //   maybeAttribute,
-      //   pTransformer.path.fieldId
-      // );
-      const targetValue = '';
-      if (targetValue === '') {
-        unused++;
-        values.push(pTransformer.defaultValue);
-      } else {
-        used++;
-        const value = pTransformer.columnTransf(
-          attrMeta,
-          maybeAttribute,
-          targetValue
-        );
-        values.push(value);
-      }
-    }
-  }
+  const values: number[] = tabGraph.nodes.map(row =>
+    pTransformer.columnTransf(row, row.cols[pTransformer.path.fieldId])
+  );
+  const unused: number = tabGraph.nodes.filter(
+    row => row.cols[pTransformer.path.fieldId].length === 0
+  ).length;
   return {
     name: makeSeriesName(pTransformer.path),
     sectionId: pTransformer.path.sectionId,
     fieldId: pTransformer.path.fieldId,
     attributeId: pTransformer.path.attributeId,
     values,
-    used,
     unused,
   };
 };
-
-const _transform4Node = (_tabGraph: TabularGraph) => (
-  pTransformer: ColumnPathTransformer
-): Series => {
-  const values: number[] = [];
-  let used = 0;
-  let unused = 0;
-
-  return {
-    name: makeSeriesName(pTransformer.path),
-    sectionId: pTransformer.path.sectionId,
-    fieldId: pTransformer.path.fieldId,
-    attributeId: pTransformer.path.attributeId,
-    values,
-    used,
-    unused,
-  };
-};
-// const map4Node = (
-//   graph: Graph,
-//   transformers: ColumnPathTransformer[]
-// ): Series[] => transformers.map(transform4Node(graph));
+const map4Nodes = (
+  tabGraph: TabularGraph,
+  transformers: ColumnPathTransformer[]
+): Series[] => transformers.map(transform4Nodes(tabGraph));
 
 const nodeToRow = (
   attributes: AttributeMetadata[],
@@ -293,6 +251,9 @@ const edgeToRow = (
   return { cols };
 };
 
+const rangeNumber = (start: number, end: number): number[] =>
+  Array.from({ length: end - start + 1 }, (_, i) => i);
+
 const toTabularGraph = (_ctx: GraphContext, graph: Graph): TabularGraph => {
   const attributeIdList = graph.attributeMetadataList.map(v => v.id);
   const idxAttributeIdMap = indexMap(attributeIdList);
@@ -334,6 +295,7 @@ const toDataGraph = (ctx: GraphContext, graph: Graph): DataGraph => {
   const idxNodeIdMap = indexMap(nodeIdList);
 
   const attributeIdList: string[] = graph.attributeMetadataList.map(v => v.id);
+  const attributeIdxList: number[] = rangeNumber(0, attributeIdList.length - 1);
 
   const tabGraph = toTabularGraph(ctx, graph);
 
@@ -350,6 +312,35 @@ const toDataGraph = (ctx: GraphContext, graph: Graph): DataGraph => {
   const stringValueSet = new Set(prepStringList);
   const stringValueList = [...stringValueSet].sort();
   const idxStringMap = indexMap(stringValueList);
+
+  const stringTransf: ColumnTransformer = (_row: Row, value: string) =>
+    idxStringMap.get(value) || -1;
+
+  const valuesField = [
+    FieldEnum.ValueField,
+    FieldEnum.OptValueZeroField,
+    FieldEnum.OptValueOneField,
+    FieldEnum.OptValueTwoField,
+    FieldEnum.NameField,
+    FieldEnum.AlternateNameField,
+  ];
+
+  const CUSTOM_STRING = 0;
+  const transfStringToIdx = (field: FieldEnum): ColumnPathTransformer[] =>
+    attributeIdxList.map(aidx => ({
+      path: createSeriesPath(
+        SectionEnum.NodeSection,
+        field,
+        CUSTOM_STRING,
+        aidx
+      ),
+      columnTransf: stringTransf,
+    }));
+
+  const defaultNodeTransformers: ColumnPathTransformer[] = valuesField.flatMap(
+    transfStringToIdx
+  );
+  const nodeTransformers = ctx.nodeTransformers.concat(defaultNodeTransformers);
 
   const results = {
     stringSeriesList: [
