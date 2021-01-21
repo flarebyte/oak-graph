@@ -176,13 +176,13 @@ const indexMap = (values: string[]): Map<string, number> => {
   return resultMap;
 };
 
-const transform4Nodes = (_ctx: GraphContext, tabGraph: TabularGraph) => (
+const transformRows = (rows: Row[]) => (
   pTransformer: ColumnPathTransformer
 ): Series => {
-  const values: number[] = tabGraph.nodes.map(row =>
+  const values: number[] = rows.map(row =>
     pTransformer.columnTransf(row, row.cols[pTransformer.path.fieldId])
   );
-  const unused: number = tabGraph.nodes.filter(
+  const unused: number = rows.filter(
     row => row.cols[pTransformer.path.fieldId].length === 0
   ).length;
   return {
@@ -191,11 +191,24 @@ const transform4Nodes = (_ctx: GraphContext, tabGraph: TabularGraph) => (
     unused,
   };
 };
+
+const transform4Nodes = (tabGraph: TabularGraph) => (
+  pTransformer: ColumnPathTransformer
+): Series => transformRows(tabGraph.nodes)(pTransformer);
+
 const map4Nodes = (
-  ctx: GraphContext,
   tabGraph: TabularGraph,
   transformers: ColumnPathTransformer[]
-): Series[] => transformers.map(transform4Nodes(ctx, tabGraph));
+): Series[] => transformers.map(transform4Nodes(tabGraph));
+
+const transform4Edges = (tabGraph: TabularGraph) => (
+  pTransformer: ColumnPathTransformer
+): Series => transformRows(tabGraph.edges)(pTransformer);
+
+const map4Edges = (
+  tabGraph: TabularGraph,
+  transformers: ColumnPathTransformer[]
+): Series[] => transformers.map(transform4Edges(tabGraph));
 
 const nodeToRow = (
   attributes: AttributeMetadata[],
@@ -249,6 +262,7 @@ const edgeToRow = (
 
 const rangeNumber = (start: number, end: number): number[] =>
   Array.from({ length: end - start + 1 }, (_, i) => i);
+
 const toTabularGraph = (_ctx: GraphContext, graph: Graph): TabularGraph => {
   const attributeIdList = graph.attributeMetadataList.map(v => v.id);
   const idxAttributeIdMap = indexMap(attributeIdList);
@@ -381,7 +395,9 @@ const toDataGraph = (ctx: GraphContext, graph: Graph): DataGraph => {
         values: stringValueList,
       },
     ],
-    seriesList: map4Nodes(ctx, tabGraph, nodeTransformers),
+    seriesList: map4Nodes(tabGraph, nodeTransformers).concat(
+      map4Edges(tabGraph, nodeTransformers)
+    ),
   };
   return results;
 };
