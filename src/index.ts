@@ -116,14 +116,22 @@ interface SeriesPath {
   attributeId: number;
   customId: number;
 }
+
 interface Series {
   path: SeriesPath;
   values: number[];
   unused: number;
 }
 
+enum StringSeriesEnum {
+  SupportedTags,
+  UsedUnitText,
+  NodeId,
+  MetaAttributeId,
+  AnyString,
+}
 interface StringSeries {
-  name: string;
+  kind: StringSeriesEnum;
   values: string[];
 }
 
@@ -333,35 +341,23 @@ const toDataGraph = (ctx: GraphContext, graph: Graph): DataGraph => {
   const results = {
     stringSeriesList: [
       {
-        name: 'tags',
+        kind: StringSeriesEnum.SupportedTags,
         values: ctx.supportedTags,
       },
       {
-        name: 'unit_text',
+        kind: StringSeriesEnum.UsedUnitText,
         values: unitTextList,
       },
       {
-        name: 'node_id',
+        kind: StringSeriesEnum.NodeId,
         values: nodeIdList,
       },
       {
-        name: 'attribute_id',
+        kind: StringSeriesEnum.MetaAttributeId,
         values: attributeIdList,
       },
       {
-        name: 'attribute_name',
-        values: graph.attributeMetadataList.map(v => v.name.trim()),
-      },
-      {
-        name: 'attribute_alternate_name',
-        values: graph.attributeMetadataList.map(v => v.alternateName.trim()),
-      },
-      {
-        name: 'attribute_unit_text',
-        values: graph.attributeMetadataList.map(v => v.unitText.trim()),
-      },
-      {
-        name: 'strings',
+        kind: StringSeriesEnum.AnyString,
         values: stringValueList,
       },
     ],

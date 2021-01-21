@@ -1,7 +1,7 @@
 {
   "stringSeriesList": [
     {
-      "name": "tags",
+      "kind": 0,
       "values": [
         "alpha",
         "beta",
@@ -9,7 +9,7 @@
       ]
     },
     {
-      "name": "unit_text",
+      "kind": 1,
       "values": [
         "GBP",
         "km",
@@ -17,7 +17,7 @@
       ]
     },
     {
-      "name": "node_id",
+      "kind": 2,
       "values": [
         "1",
         "2",
@@ -26,7 +26,7 @@
       ]
     },
     {
-      "name": "attribute_id",
+      "kind": 3,
       "values": [
         "1",
         "2",
@@ -37,40 +37,7 @@
       ]
     },
     {
-      "name": "attribute_name",
-      "values": [
-        "Speed",
-        "Real Range",
-        "Cost per km",
-        "Name",
-        "Cost per journey",
-        ""
-      ]
-    },
-    {
-      "name": "attribute_alternate_name",
-      "values": [
-        "速度",
-        "Range",
-        "",
-        "",
-        "",
-        ""
-      ]
-    },
-    {
-      "name": "attribute_unit_text",
-      "values": [
-        "km/h",
-        "km",
-        "GBP",
-        "",
-        "GBP",
-        ""
-      ]
-    },
-    {
-      "name": "strings",
+      "kind": 4,
       "values": [
         "",
         "100",
