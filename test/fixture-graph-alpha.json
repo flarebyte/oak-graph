@@ -52,6 +52,12 @@
                     "value": "car",
                     "optionalValueList": ["車"],
                     "tagSet": ["alpha"]
+                },
+                {
+                    "id": "1",
+                    "value": "100",
+                    "optionalValueList": [],
+                    "tagSet": []
                 }
             ]
         },
