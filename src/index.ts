@@ -153,7 +153,6 @@ interface ColumnPathTransformer {
 }
 interface GraphContext {
   supportedTags: string[];
-  customNames: string[];
   nodeTransformers: ColumnPathTransformer[];
   edgeTransformers: ColumnPathTransformer[];
 }
@@ -280,6 +279,9 @@ const toTabularGraph = (_ctx: GraphContext, graph: Graph): TabularGraph => {
   return { nodes, edges };
 };
 
+enum CoreCustomId {
+  StringIdx,
+}
 const toDataGraph = (ctx: GraphContext, graph: Graph): DataGraph => {
   const unitTextSet = asStringSet(
     graph.attributeMetadataList.map(v => v.unitText.trim())
@@ -300,10 +302,14 @@ const toDataGraph = (ctx: GraphContext, graph: Graph): DataGraph => {
     .concat(tabGraph.nodes.map(row => row.cols[FieldEnum.OptValueZeroField]))
     .concat(tabGraph.nodes.map(row => row.cols[FieldEnum.OptValueOneField]))
     .concat(tabGraph.nodes.map(row => row.cols[FieldEnum.OptValueTwoField]))
+    .concat(tabGraph.nodes.map(row => row.cols[FieldEnum.NameField]))
+    .concat(tabGraph.nodes.map(row => row.cols[FieldEnum.AlternateNameField]))
     .concat(tabGraph.edges.map(row => row.cols[FieldEnum.ValueField]))
     .concat(tabGraph.edges.map(row => row.cols[FieldEnum.OptValueZeroField]))
     .concat(tabGraph.edges.map(row => row.cols[FieldEnum.OptValueOneField]))
-    .concat(tabGraph.edges.map(row => row.cols[FieldEnum.OptValueTwoField]));
+    .concat(tabGraph.edges.map(row => row.cols[FieldEnum.OptValueTwoField]))
+    .concat(tabGraph.edges.map(row => row.cols[FieldEnum.NameField]))
+    .concat(tabGraph.edges.map(row => row.cols[FieldEnum.AlternateNameField]));
 
   const stringValueSet = new Set(prepStringList);
   const stringValueList = [...stringValueSet].sort();
@@ -320,15 +326,13 @@ const toDataGraph = (ctx: GraphContext, graph: Graph): DataGraph => {
     FieldEnum.NameField,
     FieldEnum.AlternateNameField,
   ];
-
-  const CUSTOM_STRING = 0;
   const transfStringToIdx = (field: FieldEnum): ColumnPathTransformer[] =>
     attributeIdxList.map(aidx => ({
       path: createSeriesPath(
         SectionEnum.NodeSection,
         field,
         aidx,
-        CUSTOM_STRING
+        CoreCustomId.StringIdx
       ),
       columnTransf: stringTransf,
     }));

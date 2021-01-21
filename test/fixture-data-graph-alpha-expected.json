@@ -45,12 +45,16 @@
         "150",
         "160",
         "25",
+        "Cost per journey",
+        "Name",
+        "Speed",
         "car",
         "gold",
         "plane",
         "silver",
         "ゴールド",
         "車",
+        "速度",
         "飛行機",
         "😁",
         "😃",
@@ -67,10 +71,10 @@
         "customId": 0
       },
       "values": [
-        6,
-        8,
-        7,
-        9
+        9,
+        11,
+        10,
+        12
       ],
       "unused": 0
     },
@@ -82,10 +86,10 @@
         "customId": 0
       },
       "values": [
-        6,
-        8,
-        7,
-        9
+        9,
+        11,
+        10,
+        12
       ],
       "unused": 0
     },
@@ -97,10 +101,10 @@
         "customId": 0
       },
       "values": [
-        6,
-        8,
-        7,
-        9
+        9,
+        11,
+        10,
+        12
       ],
       "unused": 0
     },
@@ -112,10 +116,10 @@
         "customId": 0
       },
       "values": [
-        6,
-        8,
-        7,
-        9
+        9,
+        11,
+        10,
+        12
       ],
       "unused": 0
     },
@@ -127,10 +131,10 @@
         "customId": 0
       },
       "values": [
-        6,
-        8,
-        7,
-        9
+        9,
+        11,
+        10,
+        12
       ],
       "unused": 0
     },
@@ -142,10 +146,10 @@
         "customId": 0
       },
       "values": [
-        6,
-        8,
-        7,
-        9
+        9,
+        11,
+        10,
+        12
       ],
       "unused": 0
     },
@@ -157,9 +161,9 @@
         "customId": 0
       },
       "values": [
-        11,
-        12,
-        10,
+        14,
+        16,
+        13,
         -1
       ],
       "unused": 1
@@ -172,9 +176,9 @@
         "customId": 0
       },
       "values": [
-        11,
-        12,
-        10,
+        14,
+        16,
+        13,
         -1
       ],
       "unused": 1
@@ -187,9 +191,9 @@
         "customId": 0
       },
       "values": [
-        11,
-        12,
-        10,
+        14,
+        16,
+        13,
         -1
       ],
       "unused": 1
@@ -202,9 +206,9 @@
         "customId": 0
       },
       "values": [
-        11,
-        12,
-        10,
+        14,
+        16,
+        13,
         -1
       ],
       "unused": 1
@@ -217,9 +221,9 @@
         "customId": 0
       },
       "values": [
-        11,
-        12,
-        10,
+        14,
+        16,
+        13,
         -1
       ],
       "unused": 1
@@ -232,9 +236,9 @@
         "customId": 0
       },
       "values": [
-        11,
-        12,
-        10,
+        14,
+        16,
+        13,
         -1
       ],
       "unused": 1
@@ -243,96 +247,6 @@
       "path": {
         "sectionId": 1,
         "fieldId": 2,
-        "attributeId": 0,
-        "customId": 0
-      },
-      "values": [
-        -1,
-        -1,
-        -1,
-        -1
-      ],
-      "unused": 4
-    },
-    {
-      "path": {
-        "sectionId": 1,
-        "fieldId": 2,
-        "attributeId": 1,
-        "customId": 0
-      },
-      "values": [
-        -1,
-        -1,
-        -1,
-        -1
-      ],
-      "unused": 4
-    },
-    {
-      "path": {
-        "sectionId": 1,
-        "fieldId": 2,
-        "attributeId": 2,
-        "customId": 0
-      },
-      "values": [
-        -1,
-        -1,
-        -1,
-        -1
-      ],
-      "unused": 4
-    },
-    {
-      "path": {
-        "sectionId": 1,
-        "fieldId": 2,
-        "attributeId": 3,
-        "customId": 0
-      },
-      "values": [
-        -1,
-        -1,
-        -1,
-        -1
-      ],
-      "unused": 4
-    },
-    {
-      "path": {
-        "sectionId": 1,
-        "fieldId": 2,
-        "attributeId": 4,
-        "customId": 0
-      },
-      "values": [
-        -1,
-        -1,
-        -1,
-        -1
-      ],
-      "unused": 4
-    },
-    {
-      "path": {
-        "sectionId": 1,
-        "fieldId": 2,
-        "attributeId": 5,
-        "customId": 0
-      },
-      "values": [
-        -1,
-        -1,
-        -1,
-        -1
-      ],
-      "unused": 4
-    },
-    {
-      "path": {
-        "sectionId": 1,
-        "fieldId": 3,
         "attributeId": 0,
         "customId": 0
       },
@@ -347,6 +261,96 @@
     {
       "path": {
         "sectionId": 1,
+        "fieldId": 2,
+        "attributeId": 1,
+        "customId": 0
+      },
+      "values": [
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "unused": 4
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 2,
+        "attributeId": 2,
+        "customId": 0
+      },
+      "values": [
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "unused": 4
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 2,
+        "attributeId": 3,
+        "customId": 0
+      },
+      "values": [
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "unused": 4
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 2,
+        "attributeId": 4,
+        "customId": 0
+      },
+      "values": [
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "unused": 4
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 2,
+        "attributeId": 5,
+        "customId": 0
+      },
+      "values": [
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "unused": 4
+    },
+    {
+      "path": {
+        "sectionId": 1,
+        "fieldId": 3,
+        "attributeId": 0,
+        "customId": 0
+      },
+      "values": [
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "unused": 4
+    },
+    {
+      "path": {
+        "sectionId": 1,
         "fieldId": 3,
         "attributeId": 1,
         "customId": 0
@@ -427,10 +431,10 @@
         "customId": 0
       },
       "values": [
-        -1,
-        -1,
-        -1,
-        -1
+        7,
+        7,
+        7,
+        7
       ],
       "unused": 0
     },
@@ -442,10 +446,10 @@
         "customId": 0
       },
       "values": [
-        -1,
-        -1,
-        -1,
-        -1
+        7,
+        7,
+        7,
+        7
       ],
       "unused": 0
     },
@@ -457,10 +461,10 @@
         "customId": 0
       },
       "values": [
-        -1,
-        -1,
-        -1,
-        -1
+        7,
+        7,
+        7,
+        7
       ],
       "unused": 0
     },
@@ -472,10 +476,10 @@
         "customId": 0
       },
       "values": [
-        -1,
-        -1,
-        -1,
-        -1
+        7,
+        7,
+        7,
+        7
       ],
       "unused": 0
     },
@@ -487,10 +491,10 @@
         "customId": 0
       },
       "values": [
-        -1,
-        -1,
-        -1,
-        -1
+        7,
+        7,
+        7,
+        7
       ],
       "unused": 0
     },
@@ -502,10 +506,10 @@
         "customId": 0
       },
       "values": [
-        -1,
-        -1,
-        -1,
-        -1
+        7,
+        7,
+        7,
+        7
       ],
       "unused": 0
     },
