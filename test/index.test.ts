@@ -21,7 +21,7 @@ describe('Management of graphs and networks', () => {
 
   it('should generate a data graph', () => {
     const actual = toDataGraph(defaultCtx, fixtureAlpha);
-    console.log(JSON.stringify(actual, null, 2));
+    //fs.writeFileSync('./test/fixture-data-graph-alpha-expected.json', JSON.stringify(actual, null, 2), 'utf8')
     expect(actual).toEqual(fixtureExpectedAlphaDataGraph);
   });
 });
