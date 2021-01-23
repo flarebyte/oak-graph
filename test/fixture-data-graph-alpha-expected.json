@@ -62,10 +62,9 @@
       ]
     }
   ],
-  "seriesList": [
+  "nodeSeriesList": [
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 0,
         "attributeId": 0,
         "customId": 0
@@ -81,7 +80,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 0,
         "attributeId": 1,
         "customId": 0
@@ -97,7 +95,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 0,
         "attributeId": 2,
         "customId": 0
@@ -113,7 +110,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 0,
         "attributeId": 3,
         "customId": 0
@@ -129,7 +125,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 0,
         "attributeId": 4,
         "customId": 0
@@ -145,7 +140,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 0,
         "attributeId": 5,
         "customId": 0
@@ -161,7 +155,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 1,
         "attributeId": 0,
         "customId": 0
@@ -177,7 +170,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 1,
         "attributeId": 1,
         "customId": 0
@@ -193,7 +185,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 1,
         "attributeId": 2,
         "customId": 0
@@ -209,7 +200,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 1,
         "attributeId": 3,
         "customId": 0
@@ -225,7 +215,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 1,
         "attributeId": 4,
         "customId": 0
@@ -241,7 +230,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 1,
         "attributeId": 5,
         "customId": 0
@@ -257,7 +245,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 2,
         "attributeId": 0,
         "customId": 0
@@ -273,7 +260,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 2,
         "attributeId": 1,
         "customId": 0
@@ -289,7 +275,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 2,
         "attributeId": 2,
         "customId": 0
@@ -305,7 +290,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 2,
         "attributeId": 3,
         "customId": 0
@@ -321,7 +305,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 2,
         "attributeId": 4,
         "customId": 0
@@ -337,7 +320,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 2,
         "attributeId": 5,
         "customId": 0
@@ -353,7 +335,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 3,
         "attributeId": 0,
         "customId": 0
@@ -369,7 +350,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 3,
         "attributeId": 1,
         "customId": 0
@@ -385,7 +365,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 3,
         "attributeId": 2,
         "customId": 0
@@ -401,7 +380,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 3,
         "attributeId": 3,
         "customId": 0
@@ -417,7 +395,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 3,
         "attributeId": 4,
         "customId": 0
@@ -433,7 +410,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 3,
         "attributeId": 5,
         "customId": 0
@@ -449,7 +425,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 5,
         "attributeId": 0,
         "customId": 0
@@ -465,7 +440,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 5,
         "attributeId": 1,
         "customId": 0
@@ -481,7 +455,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 5,
         "attributeId": 2,
         "customId": 0
@@ -497,7 +470,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 5,
         "attributeId": 3,
         "customId": 0
@@ -513,7 +485,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 5,
         "attributeId": 4,
         "customId": 0
@@ -529,7 +500,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 5,
         "attributeId": 5,
         "customId": 0
@@ -545,7 +515,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 6,
         "attributeId": 0,
         "customId": 0
@@ -561,7 +530,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 6,
         "attributeId": 1,
         "customId": 0
@@ -577,7 +545,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 6,
         "attributeId": 2,
         "customId": 0
@@ -593,7 +560,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 6,
         "attributeId": 3,
         "customId": 0
@@ -609,7 +575,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 6,
         "attributeId": 4,
         "customId": 0
@@ -625,7 +590,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 6,
         "attributeId": 5,
         "customId": 0
@@ -641,7 +605,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 7,
         "attributeId": 0,
         "customId": 1
@@ -657,7 +620,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 7,
         "attributeId": 1,
         "customId": 1
@@ -673,7 +635,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 7,
         "attributeId": 2,
         "customId": 1
@@ -689,7 +650,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 7,
         "attributeId": 3,
         "customId": 1
@@ -705,7 +665,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 7,
         "attributeId": 4,
         "customId": 1
@@ -721,7 +680,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 7,
         "attributeId": 5,
         "customId": 1
@@ -734,10 +692,11 @@
         -1
       ],
       "unused": 4
-    },
+    }
+  ],
+  "edgeSeriesList": [
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 0,
         "attributeId": 0,
         "customId": 0
@@ -754,7 +713,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 0,
         "attributeId": 1,
         "customId": 0
@@ -771,7 +729,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 0,
         "attributeId": 2,
         "customId": 0
@@ -788,7 +745,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 0,
         "attributeId": 3,
         "customId": 0
@@ -805,7 +761,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 0,
         "attributeId": 4,
         "customId": 0
@@ -822,7 +777,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 0,
         "attributeId": 5,
         "customId": 0
@@ -839,7 +793,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 1,
         "attributeId": 0,
         "customId": 0
@@ -856,7 +809,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 1,
         "attributeId": 1,
         "customId": 0
@@ -873,7 +825,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 1,
         "attributeId": 2,
         "customId": 0
@@ -890,7 +841,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 1,
         "attributeId": 3,
         "customId": 0
@@ -907,7 +857,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 1,
         "attributeId": 4,
         "customId": 0
@@ -924,7 +873,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 1,
         "attributeId": 5,
         "customId": 0
@@ -941,7 +889,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 2,
         "attributeId": 0,
         "customId": 0
@@ -958,7 +905,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 2,
         "attributeId": 1,
         "customId": 0
@@ -975,7 +921,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 2,
         "attributeId": 2,
         "customId": 0
@@ -992,7 +937,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 2,
         "attributeId": 3,
         "customId": 0
@@ -1009,7 +953,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 2,
         "attributeId": 4,
         "customId": 0
@@ -1026,7 +969,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 2,
         "attributeId": 5,
         "customId": 0
@@ -1043,7 +985,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 3,
         "attributeId": 0,
         "customId": 0
@@ -1060,7 +1001,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 3,
         "attributeId": 1,
         "customId": 0
@@ -1077,7 +1017,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 3,
         "attributeId": 2,
         "customId": 0
@@ -1094,7 +1033,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 3,
         "attributeId": 3,
         "customId": 0
@@ -1111,7 +1049,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 3,
         "attributeId": 4,
         "customId": 0
@@ -1128,7 +1065,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 3,
         "attributeId": 5,
         "customId": 0
@@ -1145,7 +1081,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 5,
         "attributeId": 0,
         "customId": 0
@@ -1162,7 +1097,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 5,
         "attributeId": 1,
         "customId": 0
@@ -1179,7 +1113,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 5,
         "attributeId": 2,
         "customId": 0
@@ -1196,7 +1129,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 5,
         "attributeId": 3,
         "customId": 0
@@ -1213,7 +1145,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 5,
         "attributeId": 4,
         "customId": 0
@@ -1230,7 +1161,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 5,
         "attributeId": 5,
         "customId": 0
@@ -1247,7 +1177,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 6,
         "attributeId": 0,
         "customId": 0
@@ -1264,7 +1193,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 6,
         "attributeId": 1,
         "customId": 0
@@ -1281,7 +1209,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 6,
         "attributeId": 2,
         "customId": 0
@@ -1298,7 +1225,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 6,
         "attributeId": 3,
         "customId": 0
@@ -1315,7 +1241,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 6,
         "attributeId": 4,
         "customId": 0
@@ -1332,7 +1257,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 6,
         "attributeId": 5,
         "customId": 0
@@ -1349,7 +1273,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 7,
         "attributeId": 0,
         "customId": 1
@@ -1366,7 +1289,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 7,
         "attributeId": 1,
         "customId": 1
@@ -1383,7 +1305,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 7,
         "attributeId": 2,
         "customId": 1
@@ -1400,7 +1321,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 7,
         "attributeId": 3,
         "customId": 1
@@ -1417,7 +1337,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 7,
         "attributeId": 4,
         "customId": 1
@@ -1434,7 +1353,6 @@
     },
     {
       "path": {
-        "sectionId": 1,
         "fieldId": 7,
         "attributeId": 5,
         "customId": 1

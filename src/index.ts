@@ -99,19 +99,7 @@ fieldEnumMap.set(FieldEnum.MetaTagSetField, 'meta_tags');
 fieldEnumMap.set(FieldEnum.FromNodeIdField, 'from_node');
 fieldEnumMap.set(FieldEnum.ToNodeIdField, 'to_node');
 
-enum SectionEnum {
-  MetaSection,
-  NodeSection,
-  EdgeSection,
-}
-
-const sectionEnumMap = new Map<SectionEnum, string>();
-sectionEnumMap.set(SectionEnum.MetaSection, 'meta');
-sectionEnumMap.set(SectionEnum.NodeSection, 'node');
-sectionEnumMap.set(SectionEnum.EdgeSection, 'edge');
-
 interface SeriesPath {
-  sectionId: SectionEnum;
   fieldId: FieldEnum;
   attributeId: number;
   customId: number;
@@ -137,7 +125,8 @@ interface StringSeries {
 
 interface DataGraph {
   stringSeriesList: StringSeries[];
-  seriesList: Series[];
+  nodeSeriesList: Series[];
+  edgeSeriesList: Series[];
 }
 
 interface TabularGraph {
@@ -157,11 +146,10 @@ interface GraphContext {
   edgeTransformers: ColumnPathTransformer[];
 }
 const createSeriesPath = (
-  sectionId: SectionEnum,
   fieldId: FieldEnum,
   attributeId: number,
   customId: number
-): SeriesPath => ({ sectionId, fieldId, attributeId, customId });
+): SeriesPath => ({ fieldId, attributeId, customId });
 
 const parseAsGraph = (content: string): Graph => JSON.parse(content);
 
@@ -346,19 +334,13 @@ const toDataGraph = (ctx: GraphContext, graph: Graph): DataGraph => {
   ];
   const transfStringToIdx = (field: FieldEnum): ColumnPathTransformer[] =>
     attributeIdxList.map(aidx => ({
-      path: createSeriesPath(
-        SectionEnum.NodeSection,
-        field,
-        aidx,
-        CoreCustomId.StringIdx
-      ),
+      path: createSeriesPath(field, aidx, CoreCustomId.StringIdx),
       columnTransf: stringTransf,
     }));
 
   const transfUnitTextToIdx: ColumnPathTransformer[] = attributeIdxList.map(
     aidx => ({
       path: createSeriesPath(
-        SectionEnum.NodeSection,
         FieldEnum.UnitTextField,
         aidx,
         CoreCustomId.UnitTextIdx
@@ -395,9 +377,8 @@ const toDataGraph = (ctx: GraphContext, graph: Graph): DataGraph => {
         values: stringValueList,
       },
     ],
-    seriesList: map4Nodes(tabGraph, nodeTransformers).concat(
-      map4Edges(tabGraph, nodeTransformers)
-    ),
+    nodeSeriesList: map4Nodes(tabGraph, nodeTransformers),
+    edgeSeriesList: map4Edges(tabGraph, nodeTransformers),
   };
   return results;
 };
