@@ -153,9 +153,6 @@ const createSeriesPath = (
 
 const parseAsGraph = (content: string): Graph => JSON.parse(content);
 
-const asStringSet = (items: string[]) =>
-  new Set(items.filter(s => s.length > 0));
-
 const indexMap = (values: string[]): Map<string, number> => {
   const resultMap = new Map<string, number>();
   for (let index = 0; index < values.length; index++) {
@@ -283,15 +280,8 @@ const toTabularGraph = (_ctx: GraphContext, graph: Graph): TabularGraph => {
 
 enum CoreCustomId {
   StringIdx,
-  UnitTextIdx,
 }
 const toDataGraph = (ctx: GraphContext, graph: Graph): DataGraph => {
-  const unitTextSet = asStringSet(
-    graph.attributeMetadataList.map(v => v.unitText.trim())
-  );
-  const unitTextList = [...unitTextSet].sort();
-  const idxUnitTextMap = indexMap(unitTextList);
-
   const nodeIdList = graph.nodeList.map(v => v.id);
   // const idxNodeIdMap = indexMap(nodeIdList);
 
@@ -307,12 +297,14 @@ const toDataGraph = (ctx: GraphContext, graph: Graph): DataGraph => {
     .concat(tabGraph.nodes.map(row => row.cols[FieldEnum.OptValueTwoField]))
     .concat(tabGraph.nodes.map(row => row.cols[FieldEnum.NameField]))
     .concat(tabGraph.nodes.map(row => row.cols[FieldEnum.AlternateNameField]))
+    .concat(tabGraph.nodes.map(row => row.cols[FieldEnum.UnitTextField]))
     .concat(tabGraph.edges.map(row => row.cols[FieldEnum.ValueField]))
     .concat(tabGraph.edges.map(row => row.cols[FieldEnum.OptValueZeroField]))
     .concat(tabGraph.edges.map(row => row.cols[FieldEnum.OptValueOneField]))
     .concat(tabGraph.edges.map(row => row.cols[FieldEnum.OptValueTwoField]))
     .concat(tabGraph.edges.map(row => row.cols[FieldEnum.NameField]))
-    .concat(tabGraph.edges.map(row => row.cols[FieldEnum.AlternateNameField]));
+    .concat(tabGraph.edges.map(row => row.cols[FieldEnum.AlternateNameField]))
+    .concat(tabGraph.edges.map(row => row.cols[FieldEnum.UnitTextField]));
 
   const stringValueSet = new Set(prepStringList);
   const stringValueList = [...stringValueSet].sort();
@@ -321,9 +313,6 @@ const toDataGraph = (ctx: GraphContext, graph: Graph): DataGraph => {
   const stringTransf: ColumnTransformer = (_row: Row, value: string) =>
     idxStringMap.get(value) || -1;
 
-  const unitTextTransf: ColumnTransformer = (_row: Row, value: string) =>
-    idxUnitTextMap.get(value) || -1;
-
   const valuesField = [
     FieldEnum.ValueField,
     FieldEnum.OptValueZeroField,
@@ -331,6 +320,7 @@ const toDataGraph = (ctx: GraphContext, graph: Graph): DataGraph => {
     FieldEnum.OptValueTwoField,
     FieldEnum.NameField,
     FieldEnum.AlternateNameField,
+    FieldEnum.UnitTextField,
   ];
   const transfStringToIdx = (field: FieldEnum): ColumnPathTransformer[] =>
     attributeIdxList.map(aidx => ({
@@ -338,20 +328,9 @@ const toDataGraph = (ctx: GraphContext, graph: Graph): DataGraph => {
       columnTransf: stringTransf,
     }));
 
-  const transfUnitTextToIdx: ColumnPathTransformer[] = attributeIdxList.map(
-    aidx => ({
-      path: createSeriesPath(
-        FieldEnum.UnitTextField,
-        aidx,
-        CoreCustomId.UnitTextIdx
-      ),
-      columnTransf: unitTextTransf,
-    })
+  const defaultNodeTransformers: ColumnPathTransformer[] = valuesField.flatMap(
+    transfStringToIdx
   );
-
-  const defaultNodeTransformers: ColumnPathTransformer[] = valuesField
-    .flatMap(transfStringToIdx)
-    .concat(transfUnitTextToIdx);
   const nodeTransformers = ctx.nodeTransformers.concat(defaultNodeTransformers);
 
   const results = {
@@ -359,10 +338,6 @@ const toDataGraph = (ctx: GraphContext, graph: Graph): DataGraph => {
       {
         kind: StringSeriesEnum.SupportedTags,
         values: ctx.supportedTags,
-      },
-      {
-        kind: StringSeriesEnum.UsedUnitText,
-        values: unitTextList,
       },
       {
         kind: StringSeriesEnum.NodeId,
