@@ -9,7 +9,7 @@
       ]
     },
     {
-      "kind": 2,
+      "kind": 1,
       "values": [
         "1",
         "2",
@@ -18,7 +18,7 @@
       ]
     },
     {
-      "kind": 3,
+      "kind": 2,
       "values": [
         "1",
         "2",
@@ -29,7 +29,7 @@
       ]
     },
     {
-      "kind": 4,
+      "kind": 3,
       "values": [
         "",
         "100",
@@ -64,11 +64,7 @@
         "customId": 0
       },
       "values": [
-        10,
-        1,
-        13,
-        11,
-        14
+        1
       ],
       "unused": 0
     },
@@ -78,13 +74,7 @@
         "attributeId": 1,
         "customId": 0
       },
-      "values": [
-        10,
-        1,
-        13,
-        11,
-        14
-      ],
+      "values": [],
       "unused": 0
     },
     {
@@ -93,13 +83,7 @@
         "attributeId": 2,
         "customId": 0
       },
-      "values": [
-        10,
-        1,
-        13,
-        11,
-        14
-      ],
+      "values": [],
       "unused": 0
     },
     {
@@ -110,7 +94,6 @@
       },
       "values": [
         10,
-        1,
         13,
         11,
         14
@@ -123,13 +106,7 @@
         "attributeId": 4,
         "customId": 0
       },
-      "values": [
-        10,
-        1,
-        13,
-        11,
-        14
-      ],
+      "values": [],
       "unused": 0
     },
     {
@@ -138,13 +115,7 @@
         "attributeId": 5,
         "customId": 0
       },
-      "values": [
-        10,
-        1,
-        13,
-        11,
-        14
-      ],
+      "values": [],
       "unused": 0
     },
     {
@@ -154,13 +125,9 @@
         "customId": 0
       },
       "values": [
-        16,
-        -1,
-        18,
-        15,
         -1
       ],
-      "unused": 2
+      "unused": 1
     },
     {
       "path": {
@@ -168,14 +135,8 @@
         "attributeId": 1,
         "customId": 0
       },
-      "values": [
-        16,
-        -1,
-        18,
-        15,
-        -1
-      ],
-      "unused": 2
+      "values": [],
+      "unused": 0
     },
     {
       "path": {
@@ -183,14 +144,8 @@
         "attributeId": 2,
         "customId": 0
       },
-      "values": [
-        16,
-        -1,
-        18,
-        15,
-        -1
-      ],
-      "unused": 2
+      "values": [],
+      "unused": 0
     },
     {
       "path": {
@@ -200,12 +155,11 @@
       },
       "values": [
         16,
-        -1,
         18,
         15,
         -1
       ],
-      "unused": 2
+      "unused": 1
     },
     {
       "path": {
@@ -213,14 +167,8 @@
         "attributeId": 4,
         "customId": 0
       },
-      "values": [
-        16,
-        -1,
-        18,
-        15,
-        -1
-      ],
-      "unused": 2
+      "values": [],
+      "unused": 0
     },
     {
       "path": {
@@ -228,14 +176,8 @@
         "attributeId": 5,
         "customId": 0
       },
-      "values": [
-        16,
-        -1,
-        18,
-        15,
-        -1
-      ],
-      "unused": 2
+      "values": [],
+      "unused": 0
     },
     {
       "path": {
@@ -244,13 +186,9 @@
         "customId": 0
       },
       "values": [
-        -1,
-        -1,
-        -1,
-        -1,
         -1
       ],
-      "unused": 5
+      "unused": 1
     },
     {
       "path": {
@@ -258,14 +196,8 @@
         "attributeId": 1,
         "customId": 0
       },
-      "values": [
-        -1,
-        -1,
-        -1,
-        -1,
-        -1
-      ],
-      "unused": 5
+      "values": [],
+      "unused": 0
     },
     {
       "path": {
@@ -273,14 +205,8 @@
         "attributeId": 2,
         "customId": 0
       },
-      "values": [
-        -1,
-        -1,
-        -1,
-        -1,
-        -1
-      ],
-      "unused": 5
+      "values": [],
+      "unused": 0
     },
     {
       "path": {
@@ -292,10 +218,9 @@
         -1,
         -1,
         -1,
-        -1,
         -1
       ],
-      "unused": 5
+      "unused": 4
     },
     {
       "path": {
@@ -303,14 +228,8 @@
         "attributeId": 4,
         "customId": 0
       },
-      "values": [
-        -1,
-        -1,
-        -1,
-        -1,
-        -1
-      ],
-      "unused": 5
+      "values": [],
+      "unused": 0
     },
     {
       "path": {
@@ -318,14 +237,8 @@
         "attributeId": 5,
         "customId": 0
       },
-      "values": [
-        -1,
-        -1,
-        -1,
-        -1,
-        -1
-      ],
-      "unused": 5
+      "values": [],
+      "unused": 0
     },
     {
       "path": {
@@ -334,13 +247,9 @@
         "customId": 0
       },
       "values": [
-        -1,
-        -1,
-        -1,
-        -1,
         -1
       ],
-      "unused": 5
+      "unused": 1
     },
     {
       "path": {
@@ -348,14 +257,8 @@
         "attributeId": 1,
         "customId": 0
       },
-      "values": [
-        -1,
-        -1,
-        -1,
-        -1,
-        -1
-      ],
-      "unused": 5
+      "values": [],
+      "unused": 0
     },
     {
       "path": {
@@ -363,14 +266,8 @@
         "attributeId": 2,
         "customId": 0
       },
-      "values": [
-        -1,
-        -1,
-        -1,
-        -1,
-        -1
-      ],
-      "unused": 5
+      "values": [],
+      "unused": 0
     },
     {
       "path": {
@@ -382,10 +279,9 @@
         -1,
         -1,
         -1,
-        -1,
         -1
       ],
-      "unused": 5
+      "unused": 4
     },
     {
       "path": {
@@ -393,14 +289,8 @@
         "attributeId": 4,
         "customId": 0
       },
-      "values": [
-        -1,
-        -1,
-        -1,
-        -1,
-        -1
-      ],
-      "unused": 5
+      "values": [],
+      "unused": 0
     },
     {
       "path": {
@@ -408,14 +298,8 @@
         "attributeId": 5,
         "customId": 0
       },
-      "values": [
-        -1,
-        -1,
-        -1,
-        -1,
-        -1
-      ],
-      "unused": 5
+      "values": [],
+      "unused": 0
     },
     {
       "path": {
@@ -424,11 +308,7 @@
         "customId": 0
       },
       "values": [
-        8,
-        9,
-        8,
-        8,
-        8
+        9
       ],
       "unused": 0
     },
@@ -438,13 +318,7 @@
         "attributeId": 1,
         "customId": 0
       },
-      "values": [
-        8,
-        9,
-        8,
-        8,
-        8
-      ],
+      "values": [],
       "unused": 0
     },
     {
@@ -453,13 +327,7 @@
         "attributeId": 2,
         "customId": 0
       },
-      "values": [
-        8,
-        9,
-        8,
-        8,
-        8
-      ],
+      "values": [],
       "unused": 0
     },
     {
@@ -470,7 +338,6 @@
       },
       "values": [
         8,
-        9,
         8,
         8,
         8
@@ -483,13 +350,7 @@
         "attributeId": 4,
         "customId": 0
       },
-      "values": [
-        8,
-        9,
-        8,
-        8,
-        8
-      ],
+      "values": [],
       "unused": 0
     },
     {
@@ -498,13 +359,7 @@
         "attributeId": 5,
         "customId": 0
       },
-      "values": [
-        8,
-        9,
-        8,
-        8,
-        8
-      ],
+      "values": [],
       "unused": 0
     },
     {
@@ -514,13 +369,9 @@
         "customId": 0
       },
       "values": [
-        -1,
-        17,
-        -1,
-        -1,
-        -1
+        17
       ],
-      "unused": 4
+      "unused": 0
     },
     {
       "path": {
@@ -528,14 +379,8 @@
         "attributeId": 1,
         "customId": 0
       },
-      "values": [
-        -1,
-        17,
-        -1,
-        -1,
-        -1
-      ],
-      "unused": 4
+      "values": [],
+      "unused": 0
     },
     {
       "path": {
@@ -543,14 +388,8 @@
         "attributeId": 2,
         "customId": 0
       },
-      "values": [
-        -1,
-        17,
-        -1,
-        -1,
-        -1
-      ],
-      "unused": 4
+      "values": [],
+      "unused": 0
     },
     {
       "path": {
@@ -560,7 +399,6 @@
       },
       "values": [
         -1,
-        17,
         -1,
         -1,
         -1
@@ -573,14 +411,8 @@
         "attributeId": 4,
         "customId": 0
       },
-      "values": [
-        -1,
-        17,
-        -1,
-        -1,
-        -1
-      ],
-      "unused": 4
+      "values": [],
+      "unused": 0
     },
     {
       "path": {
@@ -588,14 +420,8 @@
         "attributeId": 5,
         "customId": 0
       },
-      "values": [
-        -1,
-        17,
-        -1,
-        -1,
-        -1
-      ],
-      "unused": 4
+      "values": [],
+      "unused": 0
     },
     {
       "path": {
@@ -604,13 +430,9 @@
         "customId": 0
       },
       "values": [
-        -1,
-        12,
-        -1,
-        -1,
-        -1
+        12
       ],
-      "unused": 4
+      "unused": 0
     },
     {
       "path": {
@@ -618,14 +440,8 @@
         "attributeId": 1,
         "customId": 0
       },
-      "values": [
-        -1,
-        12,
-        -1,
-        -1,
-        -1
-      ],
-      "unused": 4
+      "values": [],
+      "unused": 0
     },
     {
       "path": {
@@ -633,14 +449,8 @@
         "attributeId": 2,
         "customId": 0
       },
-      "values": [
-        -1,
-        12,
-        -1,
-        -1,
-        -1
-      ],
-      "unused": 4
+      "values": [],
+      "unused": 0
     },
     {
       "path": {
@@ -650,7 +460,6 @@
       },
       "values": [
         -1,
-        12,
         -1,
         -1,
         -1
@@ -663,14 +472,8 @@
         "attributeId": 4,
         "customId": 0
       },
-      "values": [
-        -1,
-        12,
-        -1,
-        -1,
-        -1
-      ],
-      "unused": 4
+      "values": [],
+      "unused": 0
     },
     {
       "path": {
@@ -678,14 +481,8 @@
         "attributeId": 5,
         "customId": 0
       },
-      "values": [
-        -1,
-        12,
-        -1,
-        -1,
-        -1
-      ],
-      "unused": 4
+      "values": [],
+      "unused": 0
     }
   ],
   "edgeSeriesList": [
@@ -697,11 +494,8 @@
       },
       "values": [
         1,
-        5,
         3,
-        2,
-        3,
-        4
+        3
       ],
       "unused": 0
     },
@@ -711,14 +505,7 @@
         "attributeId": 1,
         "customId": 0
       },
-      "values": [
-        1,
-        5,
-        3,
-        2,
-        3,
-        4
-      ],
+      "values": [],
       "unused": 0
     },
     {
@@ -727,14 +514,7 @@
         "attributeId": 2,
         "customId": 0
       },
-      "values": [
-        1,
-        5,
-        3,
-        2,
-        3,
-        4
-      ],
+      "values": [],
       "unused": 0
     },
     {
@@ -743,14 +523,7 @@
         "attributeId": 3,
         "customId": 0
       },
-      "values": [
-        1,
-        5,
-        3,
-        2,
-        3,
-        4
-      ],
+      "values": [],
       "unused": 0
     },
     {
@@ -760,11 +533,8 @@
         "customId": 0
       },
       "values": [
-        1,
         5,
-        3,
         2,
-        3,
         4
       ],
       "unused": 0
@@ -775,14 +545,7 @@
         "attributeId": 5,
         "customId": 0
       },
-      "values": [
-        1,
-        5,
-        3,
-        2,
-        3,
-        4
-      ],
+      "values": [],
       "unused": 0
     },
     {
@@ -793,13 +556,10 @@
       },
       "values": [
         -1,
-        19,
         20,
-        21,
-        -1,
         -1
       ],
-      "unused": 3
+      "unused": 2
     },
     {
       "path": {
@@ -807,15 +567,8 @@
         "attributeId": 1,
         "customId": 0
       },
-      "values": [
-        -1,
-        19,
-        20,
-        21,
-        -1,
-        -1
-      ],
-      "unused": 3
+      "values": [],
+      "unused": 0
     },
     {
       "path": {
@@ -823,15 +576,8 @@
         "attributeId": 2,
         "customId": 0
       },
-      "values": [
-        -1,
-        19,
-        20,
-        21,
-        -1,
-        -1
-      ],
-      "unused": 3
+      "values": [],
+      "unused": 0
     },
     {
       "path": {
@@ -839,15 +585,8 @@
         "attributeId": 3,
         "customId": 0
       },
-      "values": [
-        -1,
-        19,
-        20,
-        21,
-        -1,
-        -1
-      ],
-      "unused": 3
+      "values": [],
+      "unused": 0
     },
     {
       "path": {
@@ -856,14 +595,11 @@
         "customId": 0
       },
       "values": [
-        -1,
         19,
-        20,
         21,
-        -1,
         -1
       ],
-      "unused": 3
+      "unused": 1
     },
     {
       "path": {
@@ -871,15 +607,8 @@
         "attributeId": 5,
         "customId": 0
       },
-      "values": [
-        -1,
-        19,
-        20,
-        21,
-        -1,
-        -1
-      ],
-      "unused": 3
+      "values": [],
+      "unused": 0
     },
     {
       "path": {
@@ -890,12 +619,9 @@
       "values": [
         -1,
         -1,
-        -1,
-        -1,
-        -1,
         -1
       ],
-      "unused": 6
+      "unused": 3
     },
     {
       "path": {
@@ -903,15 +629,8 @@
         "attributeId": 1,
         "customId": 0
       },
-      "values": [
-        -1,
-        -1,
-        -1,
-        -1,
-        -1,
-        -1
-      ],
-      "unused": 6
+      "values": [],
+      "unused": 0
     },
     {
       "path": {
@@ -919,15 +638,8 @@
         "attributeId": 2,
         "customId": 0
       },
-      "values": [
-        -1,
-        -1,
-        -1,
-        -1,
-        -1,
-        -1
-      ],
-      "unused": 6
+      "values": [],
+      "unused": 0
     },
     {
       "path": {
@@ -935,15 +647,8 @@
         "attributeId": 3,
         "customId": 0
       },
-      "values": [
-        -1,
-        -1,
-        -1,
-        -1,
-        -1,
-        -1
-      ],
-      "unused": 6
+      "values": [],
+      "unused": 0
     },
     {
       "path": {
@@ -954,12 +659,9 @@
       "values": [
         -1,
         -1,
-        -1,
-        -1,
-        -1,
         -1
       ],
-      "unused": 6
+      "unused": 3
     },
     {
       "path": {
@@ -967,15 +669,8 @@
         "attributeId": 5,
         "customId": 0
       },
-      "values": [
-        -1,
-        -1,
-        -1,
-        -1,
-        -1,
-        -1
-      ],
-      "unused": 6
+      "values": [],
+      "unused": 0
     },
     {
       "path": {
@@ -986,12 +681,9 @@
       "values": [
         -1,
         -1,
-        -1,
-        -1,
-        -1,
         -1
       ],
-      "unused": 6
+      "unused": 3
     },
     {
       "path": {
@@ -999,15 +691,8 @@
         "attributeId": 1,
         "customId": 0
       },
-      "values": [
-        -1,
-        -1,
-        -1,
-        -1,
-        -1,
-        -1
-      ],
-      "unused": 6
+      "values": [],
+      "unused": 0
     },
     {
       "path": {
@@ -1015,15 +700,8 @@
         "attributeId": 2,
         "customId": 0
       },
-      "values": [
-        -1,
-        -1,
-        -1,
-        -1,
-        -1,
-        -1
-      ],
-      "unused": 6
+      "values": [],
+      "unused": 0
     },
     {
       "path": {
@@ -1031,15 +709,8 @@
         "attributeId": 3,
         "customId": 0
       },
-      "values": [
-        -1,
-        -1,
-        -1,
-        -1,
-        -1,
-        -1
-      ],
-      "unused": 6
+      "values": [],
+      "unused": 0
     },
     {
       "path": {
@@ -1050,12 +721,9 @@
       "values": [
         -1,
         -1,
-        -1,
-        -1,
-        -1,
         -1
       ],
-      "unused": 6
+      "unused": 3
     },
     {
       "path": {
@@ -1063,15 +731,8 @@
         "attributeId": 5,
         "customId": 0
       },
-      "values": [
-        -1,
-        -1,
-        -1,
-        -1,
-        -1,
-        -1
-      ],
-      "unused": 6
+      "values": [],
+      "unused": 0
     },
     {
       "path": {
@@ -1081,11 +742,8 @@
       },
       "values": [
         9,
-        6,
         9,
-        6,
-        9,
-        6
+        9
       ],
       "unused": 0
     },
@@ -1095,14 +753,7 @@
         "attributeId": 1,
         "customId": 0
       },
-      "values": [
-        9,
-        6,
-        9,
-        6,
-        9,
-        6
-      ],
+      "values": [],
       "unused": 0
     },
     {
@@ -1111,14 +762,7 @@
         "attributeId": 2,
         "customId": 0
       },
-      "values": [
-        9,
-        6,
-        9,
-        6,
-        9,
-        6
-      ],
+      "values": [],
       "unused": 0
     },
     {
@@ -1127,14 +771,7 @@
         "attributeId": 3,
         "customId": 0
       },
-      "values": [
-        9,
-        6,
-        9,
-        6,
-        9,
-        6
-      ],
+      "values": [],
       "unused": 0
     },
     {
@@ -1144,11 +781,8 @@
         "customId": 0
       },
       "values": [
-        9,
         6,
-        9,
         6,
-        9,
         6
       ],
       "unused": 0
@@ -1159,14 +793,7 @@
         "attributeId": 5,
         "customId": 0
       },
-      "values": [
-        9,
-        6,
-        9,
-        6,
-        9,
-        6
-      ],
+      "values": [],
       "unused": 0
     },
     {
@@ -1177,13 +804,10 @@
       },
       "values": [
         17,
-        -1,
         17,
-        -1,
-        17,
-        -1
+        17
       ],
-      "unused": 3
+      "unused": 0
     },
     {
       "path": {
@@ -1191,15 +815,8 @@
         "attributeId": 1,
         "customId": 0
       },
-      "values": [
-        17,
-        -1,
-        17,
-        -1,
-        17,
-        -1
-      ],
-      "unused": 3
+      "values": [],
+      "unused": 0
     },
     {
       "path": {
@@ -1207,15 +824,8 @@
         "attributeId": 2,
         "customId": 0
       },
-      "values": [
-        17,
-        -1,
-        17,
-        -1,
-        17,
-        -1
-      ],
-      "unused": 3
+      "values": [],
+      "unused": 0
     },
     {
       "path": {
@@ -1223,15 +833,8 @@
         "attributeId": 3,
         "customId": 0
       },
-      "values": [
-        17,
-        -1,
-        17,
-        -1,
-        17,
-        -1
-      ],
-      "unused": 3
+      "values": [],
+      "unused": 0
     },
     {
       "path": {
@@ -1240,11 +843,8 @@
         "customId": 0
       },
       "values": [
-        17,
         -1,
-        17,
         -1,
-        17,
         -1
       ],
       "unused": 3
@@ -1255,15 +855,8 @@
         "attributeId": 5,
         "customId": 0
       },
-      "values": [
-        17,
-        -1,
-        17,
-        -1,
-        17,
-        -1
-      ],
-      "unused": 3
+      "values": [],
+      "unused": 0
     },
     {
       "path": {
@@ -1273,11 +866,8 @@
       },
       "values": [
         12,
-        7,
         12,
-        7,
-        12,
-        7
+        12
       ],
       "unused": 0
     },
@@ -1287,14 +877,7 @@
         "attributeId": 1,
         "customId": 0
       },
-      "values": [
-        12,
-        7,
-        12,
-        7,
-        12,
-        7
-      ],
+      "values": [],
       "unused": 0
     },
     {
@@ -1303,14 +886,7 @@
         "attributeId": 2,
         "customId": 0
       },
-      "values": [
-        12,
-        7,
-        12,
-        7,
-        12,
-        7
-      ],
+      "values": [],
       "unused": 0
     },
     {
@@ -1319,14 +895,7 @@
         "attributeId": 3,
         "customId": 0
       },
-      "values": [
-        12,
-        7,
-        12,
-        7,
-        12,
-        7
-      ],
+      "values": [],
       "unused": 0
     },
     {
@@ -1336,11 +905,8 @@
         "customId": 0
       },
       "values": [
-        12,
         7,
-        12,
         7,
-        12,
         7
       ],
       "unused": 0
@@ -1351,14 +917,7 @@
         "attributeId": 5,
         "customId": 0
       },
-      "values": [
-        12,
-        7,
-        12,
-        7,
-        12,
-        7
-      ],
+      "values": [],
       "unused": 0
     }
   ]
