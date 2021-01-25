@@ -68,7 +68,7 @@ describe('Management of graphs and networks', () => {
       actual.stringSeriesList[StringSeriesEnum.NodeId].values.length;
     expect(nodeLength).toEqual(fixtureAlpha.nodeList.length);
     expect(
-      actual.nodeSeriesList.filter(s => s.values.length !== nodeLength)
+      actual.nodeSeriesList.filter(s => s.values.length <= nodeLength)
     ).toHaveLength(0);
   });
 });
